@@ -1,0 +1,78 @@
+{
+  "temple": "Ganesha Temple",
+  "welcome": "Welcome to Ganesha Temple",
+  "description": "A sacred Hindu temple dedicated to Lord Ganesha. Join us for daily pujas, festivals, and spiritual events.",
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "events": "Events",
+    "gallery": "Gallery",
+    "donations": "Donations",
+    "contact": "Contact",
+    "sankalpa": "Sankalpa"
+  },
+  "timings": {
+    "title": "Temple Timings",
+    "morning": "Morning Darshan",
+    "morningTime": "6:00 AM - 12:00 PM",
+    "evening": "Evening Darshan",
+    "eveningTime": "4:00 PM - 9:00 PM"
+  },
+  "festivals": {
+    "title": "Upcoming Festivals",
+    "ganeshChaturthi": "Ganesh Chaturthi",
+    "ganeshChaturthiDesc": "Join us for the grand celebration of Lord Ganesha's birthday",
+    "diwali": "Diwali Puja",
+    "diwaliDesc": "Celebrate the festival of lights with traditional rituals",
+    "abhishekam": "Monthly Abhishekam",
+    "abhishekamDesc": "Special abhishekam performed every full moon day"
+  },
+  "footer": {
+    "tagline": "A place of peace, prayer, and community",
+    "quickLinks": "Quick Links",
+    "email": "Email",
+    "phone": "Phone",
+    "rights": "All rights reserved"
+  },
+  "dynamic": {
+    "greeting": "Hello, {{name}}!",
+    "upcomingEvent": "Next event: {{eventName}} on {{date}}",
+    "devoteeCount": "{{count}} devotee visited today",
+    "devoteeCount_plural": "{{count}} devotees visited today",
+    "donationAmount": "Total donations: {{amount}}",
+    "lastUpdated": "Last updated: {{date}}",
+    "eventDate": "Event on {{date}}"
+  },
+  "common": {
+    "learnMore": "Learn More",
+    "submit": "Submit",
+    "cancel": "Cancel"
+  },
+  "about": {
+    "title": "About Our Temple",
+    "history": "Our History",
+    "historyText": "The Ganesha Temple was established with the vision of creating a spiritual haven for devotees to connect with Lord Ganesha, the remover of obstacles and the deity of wisdom and prosperity. Our temple has been serving the community for years, providing a place for worship, cultural events, and spiritual growth.",
+    "mission": "Our Mission",
+    "missionText": "We are dedicated to:",
+    "missionItems": {
+      "values": "Promoting Hindu spiritual values and traditions",
+      "space": "Providing a welcoming space for worship and meditation",
+      "festivals": "Organizing cultural and religious festivals",
+      "community": "Supporting community development and charitable activities",
+      "wisdom": "Preserving and sharing ancient wisdom and teachings"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "We'd love to hear from you. Reach out with questions, feedback, or to learn more about our temple",
+    "address": "Address",
+    "phoneLabel": "Phone",
+    "emailLabel": "Email",
+    "hours": "Temple Hours",
+    "sendMessage": "Send us a Message",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send Message"
+  }
+}
