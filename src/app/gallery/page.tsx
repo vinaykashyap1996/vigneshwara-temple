@@ -4,9 +4,6 @@ import Link from "next/link";
 export default function Gallery() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white">
-      {/* Navigation */}
-      <Navbar />
-
       {/* Page Content */}
       <div className="container mx-auto px-4 py-16">
         <h1 className="text-5xl font-bold text-orange-900 mb-8 text-center">

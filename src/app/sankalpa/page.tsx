@@ -11,9 +11,6 @@ export const metadata = {
 export default function SankalpaPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white">
-      {/* Navigation */}
-      <Navbar />
-
       {/* Page Header */}
       <div className="container mx-auto px-4 py-12">
         <div className="text-center max-w-3xl mx-auto mb-8">
