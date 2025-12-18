@@ -1,47 +1,219 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
+/* -------------------------------------------------------
+   Base CSS variables (app-level, non-Tailwind tokens)
+--------------------------------------------------------*/
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* If you still want these for non-Tailwind usages */
   --primary-color: #f84c02c4;
   --secondary-color: #440e04;
   --tertiary-color: #f59e0b;
   --accent-color: #fef2c8;
 }
 
-html,
-body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* -------------------------------------------------------
+   Tailwind v4 tokens (this generates utilities)
+   Mobile-first: base values apply to all, use sm/md/... to scale up.
+--------------------------------------------------------*/
+@theme {
+  /* Breakpoints (optional xs + custom 2xl) */
+  --breakpoint-xs: 420px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1440px;
+
+  /* Container sizing: you want max width 1220px */
+  --container: 1220px;
+
+  /* Fonts: use Next.js variable fonts when present */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo,
+    monospace;
+
+  /* Color system (prefer semantic names over raw colors) */
+  --color-bg: var(--background);
+  --color-fg: var(--foreground);
+
+  /* -----------------------------------------
+     Divine Saffron (Primary)
+  ------------------------------------------*/
+  --color-orange-50: #fff9f2; /* very light saffron wash */
+  --color-orange-100: #ffeddc;
+  --color-orange-200: #ffd6b3;
+  --color-orange-300: #ffb877;
+  --color-orange-500: #f28c28; /* sacred saffron */
+  --color-orange-700: #c56a1d;
+  --color-orange-900: #8a3f12; /* temple saffron brown */
+
+  /* -----------------------------------------
+     Dark Red (Secondary)
+  ------------------------------------------*/
+  --color-red-100: #fde8e8;
+  --color-red-300: #f4a3a3;
+  --color-red-500: #b11226; /* sindoor red */
+  --color-red-700: #7a0b18;
+  --color-red-900: #4a050d;
+
+  /* -----------------------------------------
+      Gold (Tertiary)
+  ------------------------------------------*/
+  --color-gold-100: #fff6d6;
+  --color-gold-300: #f5d98b;
+  --color-gold-500: #d4af37; /* classical gold */
+  --color-gold-700: #a8892c;
+  --color-gold-900: #6f5a1d;
+
+  /* -----------------------------------------
+     Ivory (Accent)
+  ------------------------------------------*/
+  --color-ivory: #fdfaf4;
+
+  /* -----------------------------------------
+     Neutral System (kept calm)
+  ------------------------------------------*/
+  --color-muted: #6b5f55; /* warm muted brown-gray */
+  --color-border: #e6dccf; /* parchment-like border */
+  --color-fg: #2b1d14; /* deep incense brown */
+  --color-bg: var(--color-ivory);
 }
 
+/* -------------------------------------------------------
+   Base styles
+--------------------------------------------------------*/
+html,
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+/* -------------------------------------------------------
+   Semantic components
+--------------------------------------------------------*/
 @layer components {
-  .header1 {
-    @apply text-[var(--secondary-color)] text-7xl font-bold leading-tight;
+  /* Page container: max 1220px, centered, with responsive padding */
+  .container-page {
+    @apply mx-auto w-full max-w-[1220px] px-4 sm:px-6 lg:px-8;
   }
 
-  .header2 {
-    @apply text-5xl font-semibold leading-tight;
+  .section {
+    @apply py-6 md:py-8 lg:py-10;
   }
 
-  .header3 {
-    @apply text-3xl font-medium leading-snug;
+  /* Typography */
+  .h1 {
+    @apply font-bold tracking-tight;
+    @apply text-[2.25rem] leading-[1.1]; /* mobile */
+    @apply md:text-[2.75rem] md:leading-[1.08]; /* iPad */
+    @apply lg:text-[5rem] lg:leading-[1.06]; /* laptop */
   }
 
-  .header4 {
-    @apply text-2xl font-medium leading-snug;
+  .h2 {
+    @apply font-bold tracking-tight;
+    @apply text-[1.875rem] leading-[1.15]; /* mobile */
+    @apply md:text-[2.25rem] md:leading-[1.12];
+    @apply lg:text-[2.75rem] lg:leading-[1.1];
   }
 
-  .body-text {
-    @apply text-xl leading-relaxed;
+  .h3 {
+    @apply font-semibold text-fg;
+    @apply text-[1.5rem] leading-[1.2]; /* mobile */
+    @apply md:text-[1.75rem] md:leading-[1.18];
+    @apply lg:text-[2rem] lg:leading-[1.16];
   }
 
-  .sub-text {
-    @apply text-lg leading-relaxed;
+  .h4 {
+    @apply font-semibold text-fg;
+    @apply text-[1.25rem] leading-[1.25]; /* mobile */
+    @apply md:text-[1.375rem] md:leading-[1.22];
+    @apply lg:text-[1.5rem] lg:leading-[1.2];
   }
 
-  .bg-primary {
-    @apply bg-[var(--primary-color)];
+  /* Body text */
+
+  .text-body {
+    @apply text-fg;
+    @apply text-[1rem] leading-[1.65]; /* mobile */
+    @apply md:text-[1.0625rem] md:leading-[1.7];
+    @apply lg:text-[1.125rem] lg:leading-[1.75];
+  }
+
+  .text-desc {
+    @apply text-muted/60;
+    @apply text-[0.9375rem] leading-[1.1]; /* mobile */
+    @apply md:text-[1rem] md:leading-[1.15];
+    @apply lg:text-[1.0625rem] lg:leading-[1.2];
+  }
+
+  .badge {
+    @apply rounded-lg bg-black/50 px-4 py-2 text-sm text-ivory backdrop-blur;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2
+           rounded-4xl font-medium
+           px-8 py-2
+           transition-all duration-200
+           focus:outline-none
+           focus-visible:ring-2 focus-visible:ring-offset-2;
+  }
+
+  /* Gold (primary / divine) */
+  .btn-gold {
+    @apply text-white;
+    background: linear-gradient(
+      135deg,
+      var(--color-gold-300),
+      var(--color-gold-700)
+    );
+  }
+  .btn-gold:hover {
+    filter: brightness(1.05);
+  }
+  .btn-gold:active {
+    transform: translateY(1px);
+  }
+  .btn-gold:focus-visible {
+    --tw-ring-color: var(--color-gold-500);
+  }
+
+  /* GRAY button (subtle translucent gradient) */
+  .btn-gray {
+    @apply text-ivory;
+    background: linear-gradient(
+      135deg,
+      rgba(28, 28, 30, 0.65),
+      rgba(40, 40, 44, 0.55)
+    );
+    backdrop-filter: blur(10px) saturate(120%);
+    -webkit-backdrop-filter: blur(10px) saturate(120%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 8px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  .btn-gray:hover {
+    background: linear-gradient(
+      135deg,
+      rgba(36, 36, 38, 0.75),
+      rgba(52, 52, 56, 0.65)
+    );
+  }
+
+  .btn-gray:active {
+    transform: translateY(1px);
+  }
+
+  .btn-gray:focus-visible {
+    --tw-ring-color: rgba(255, 255, 255, 0.35);
   }
 }

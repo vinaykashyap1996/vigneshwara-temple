@@ -1,3 +1,4 @@
+import Navbar from "@/components/Navbar";
 import Link from "next/link";
 
 export default function Events() {
@@ -5,72 +6,69 @@ export default function Events() {
     {
       title: "Ganesh Chaturthi",
       date: "September 2025",
-      description: "The most auspicious festival celebrating the birth of Lord Ganesha with 10 days of special pujas, cultural programs, and community feasts.",
-      icon: "🎉"
+      description:
+        "The most auspicious festival celebrating the birth of Lord Ganesha with 10 days of special pujas, cultural programs, and community feasts.",
+      icon: "🎉",
     },
     {
       title: "Diwali",
       date: "October/November 2025",
-      description: "Festival of lights with special Lakshmi puja, lamp lighting ceremony, and traditional celebrations.",
-      icon: "🪔"
+      description:
+        "Festival of lights with special Lakshmi puja, lamp lighting ceremony, and traditional celebrations.",
+      icon: "🪔",
     },
     {
       title: "Navaratri",
       date: "September/October 2025",
-      description: "Nine nights of worship dedicated to Goddess Durga with daily aartis, garba, and dandiya nights.",
-      icon: "💃"
+      description:
+        "Nine nights of worship dedicated to Goddess Durga with daily aartis, garba, and dandiya nights.",
+      icon: "💃",
     },
     {
       title: "Sankashti Chaturthi",
       date: "Monthly",
-      description: "Monthly observance dedicated to Lord Ganesha, observed on the 4th day after the full moon.",
-      icon: "🌙"
+      description:
+        "Monthly observance dedicated to Lord Ganesha, observed on the 4th day after the full moon.",
+      icon: "🌙",
     },
     {
       title: "Maha Shivaratri",
       date: "February/March 2025",
-      description: "Great night of Shiva with all-night vigil, special abhishekam, and meditation sessions.",
-      icon: "🔱"
+      description:
+        "Great night of Shiva with all-night vigil, special abhishekam, and meditation sessions.",
+      icon: "🔱",
     },
     {
       title: "Holi",
       date: "March 2025",
-      description: "Festival of colors celebrating the victory of good over evil with music, dance, and color play.",
-      icon: "🎨"
-    }
+      description:
+        "Festival of colors celebrating the victory of good over evil with music, dance, and color play.",
+      icon: "🎨",
+    },
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white">
-      {/* Navigation */}
-      <nav className="bg-orange-600 text-white shadow-lg">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="text-2xl font-bold">🕉️ Ganesha Temple</Link>
-            <div className="hidden md:flex space-x-6">
-              <Link href="/" className="hover:text-orange-200 transition">Home</Link>
-              <Link href="/about" className="hover:text-orange-200 transition">About</Link>
-              <Link href="/events" className="text-orange-200">Events</Link>
-              <Link href="/gallery" className="hover:text-orange-200 transition">Gallery</Link>
-              <Link href="/donations" className="hover:text-orange-200 transition">Donate</Link>
-              <Link href="/contact" className="hover:text-orange-200 transition">Contact</Link>
-            </div>
-          </div>
-        </div>
-      </nav>
-
       {/* Page Content */}
       <div className="container mx-auto px-4 py-16">
-        <h1 className="text-5xl font-bold text-orange-900 mb-8 text-center">Festivals & Events</h1>
+        <h1 className="text-5xl font-bold text-orange-900 mb-8 text-center">
+          Festivals & Events
+        </h1>
         <p className="text-xl text-gray-700 text-center mb-12 max-w-3xl mx-auto">
-          Join us in celebrating sacred festivals and spiritual events throughout the year
+          Join us in celebrating sacred festivals and spiritual events
+          throughout the year
         </p>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {events.map((event, index) => (
-            <div key={index} className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition">
+            <div
+              key={index}
+              className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition"
+            >
               <div className="text-5xl mb-4">{event.icon}</div>
-              <h3 className="text-2xl font-bold text-orange-800 mb-2">{event.title}</h3>
+              <h3 className="text-2xl font-bold text-orange-800 mb-2">
+                {event.title}
+              </h3>
               <p className="text-orange-600 font-semibold mb-3">{event.date}</p>
               <p className="text-gray-700">{event.description}</p>
             </div>
@@ -78,15 +76,23 @@ export default function Events() {
         </div>
 
         <div className="mt-16 max-w-4xl mx-auto bg-orange-50 p-8 rounded-lg">
-          <h2 className="text-3xl font-bold text-orange-900 mb-4 text-center">Weekly Schedule</h2>
+          <h2 className="text-3xl font-bold text-orange-900 mb-4 text-center">
+            Weekly Schedule
+          </h2>
           <div className="space-y-4">
             <div className="flex justify-between items-center border-b border-orange-200 pb-2">
-              <span className="font-semibold text-gray-800">Monday - Friday</span>
-              <span className="text-gray-700">Morning Aarti: 6:30 AM | Evening Aarti: 7:00 PM</span>
+              <span className="font-semibold text-gray-800">
+                Monday - Friday
+              </span>
+              <span className="text-gray-700">
+                Morning Aarti: 6:30 AM | Evening Aarti: 7:00 PM
+              </span>
             </div>
             <div className="flex justify-between items-center border-b border-orange-200 pb-2">
               <span className="font-semibold text-gray-800">Saturday</span>
-              <span className="text-gray-700">Special Abhishekam: 10:00 AM</span>
+              <span className="text-gray-700">
+                Special Abhishekam: 10:00 AM
+              </span>
             </div>
             <div className="flex justify-between items-center border-b border-orange-200 pb-2">
               <span className="font-semibold text-gray-800">Sunday</span>
