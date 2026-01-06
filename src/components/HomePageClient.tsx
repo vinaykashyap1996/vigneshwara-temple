@@ -1,10 +1,11 @@
-"use client";
+'use client';
 
-import { useTranslation } from "react-i18next";
-import Link from "next/link";
-import SankalpaSection from "@/components/SankalpaSection";
-import "../i18next";
-import ActionCard from "./ActionCard";
+import { useTranslation } from 'react-i18next';
+import Link from 'next/link';
+import SankalpaSection from '@/components/SankalpaSection';
+import '../i18next';
+import ActionCard from './ActionCard';
+import Image from 'next/image';
 
 export default function HomePageClient() {
   const { t } = useTranslation();
@@ -12,51 +13,58 @@ export default function HomePageClient() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative text-center section">
+      <section className='relative text-center section'>
         {/* Background layer (70%) */}
-        <div className="absolute inset-x-0 top-0 h-[70%] bg-orange-600" />
+        <div className='absolute inset-x-0 top-0 h-[70%] bg-orange-600' />
 
         {/* Content */}
-        <div className="container-page">
-          <div className="relative flex flex-col items-center justify-center">
-            <h1 className="h1 py-10 text-ivory">{t("welcome")}</h1>
+        <div className='container-page'>
+          <div className='relative flex flex-col items-center justify-center'>
+            <h1 className='h1 py-10 text-ivory'>{t('welcome')}</h1>
 
             {/* Image wrapper becomes positioning context */}
-            <div className="relative ">
-              <img
-                src="/temple.jpg"
-                alt="Vigneshwara Temple"
-                className="w-full h-auto rounded-xl"
+            <div className='relative w-full max-w-4xl aspect-[4/3]'>
+              <Image
+                src='/vighneshwara.webp'
+                alt='Vigneshwara Temple'
+                className='rounded-xl object-cover'
+                fill
+                sizes='(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px'
+                priority
               />
             </div>
           </div>
         </div>
       </section>
 
-      <section className="section">
-        <div className="container-page">
-          <div className="h3">
-            <p className="mb-4">Quick Actions</p>
-            <div className="flex gap-6 flex-wrap items-center justify-center">
+      <section className='section'>
+        <div className='container-page'>
+          <div className='h3'>
+            <p className='mb-4'>Quick Actions</p>
+            <div className='flex gap-6 flex-wrap items-center justify-center'>
               <ActionCard
-                icon=""
-                title="Explore Temples"
-                description="Discover sacred spaces and divine architecture."
+                key='temple'
+                icon='temple_hindu'
+                title='Explore Temples'
+                description='Discover sacred spaces and divine architecture.'
               />
               <ActionCard
-                icon=""
-                title="Explore Temples"
-                description="Discover sacred spaces and divine architecture."
+                key='puja'
+                icon='spa'
+                title='Book Puja'
+                description='Schedule religious ceremonies and offerings.'
               />
               <ActionCard
-                icon=""
-                title="Explore Temples"
-                description="Discover sacred spaces and divine architecture."
+                key='donate'
+                icon='volunteer_activism'
+                title='Donate'
+                description='Support temple activities and community services.'
               />
               <ActionCard
-                icon=""
-                title="Explore Temples"
-                description="Discover sacred spaces and divine architecture."
+                key='events'
+                icon='event'
+                title='Upcoming Events'
+                description='View festivals, celebrations, and special occasions.'
               />
             </div>
           </div>
