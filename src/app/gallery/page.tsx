@@ -1,53 +1,69 @@
-import Navbar from "@/components/Navbar";
-import Link from "next/link";
+'use client';
 
-export default function Gallery() {
+import { useState, useMemo } from 'react';
+// import GalleryHero from './components/GalleryHero';
+import GalleryFilters from './components/GalleryFilters';
+import GalleryGrid from './components/GalleryGrid';
+import LoadMoreButton from './components/LoadMoreButton';
+import PhotographyNotice from './components/PhotographyNotice';
+import { galleryFilters, galleryItems } from './data';
+import { GalleryCategory } from './types';
+
+const ITEMS_PER_PAGE = 8;
+
+export default function GalleryPage() {
+  const [activeFilter, setActiveFilter] = useState<GalleryCategory>('all');
+  const [itemsToShow, setItemsToShow] = useState(ITEMS_PER_PAGE);
+
+  // Filter items based on active category
+  const filteredItems = useMemo(() => {
+    if (activeFilter === 'all') {
+      return galleryItems;
+    }
+    return galleryItems.filter((item) => item.category === activeFilter);
+  }, [activeFilter]);
+
+  // Get items to display based on pagination
+  const displayedItems = useMemo(() => {
+    return filteredItems.slice(0, itemsToShow);
+  }, [filteredItems, itemsToShow]);
+
+  // Check if there are more items to load
+  const hasMore = itemsToShow < filteredItems.length;
+
+  // Handle filter change
+  const handleFilterChange = (filter: GalleryCategory) => {
+    setActiveFilter(filter);
+    setItemsToShow(ITEMS_PER_PAGE); // Reset pagination when filter changes
+  };
+
+  // Handle load more
+  const handleLoadMore = () => {
+    setItemsToShow((prev) => prev + ITEMS_PER_PAGE);
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white">
-      {/* Page Content */}
-      <div className="container mx-auto px-4 py-16">
-        <h1 className="text-5xl font-bold text-orange-900 mb-8 text-center">
-          Photo Gallery
-        </h1>
-        <p className="text-xl text-gray-700 text-center mb-12 max-w-3xl mx-auto">
-          Glimpses of our temple, festivals, and community celebrations
-        </p>
+    <div className='relative flex min-h-screen w-full flex-col overflow-x-hidden bg-ivory'>
+      <main className='flex-1 w-full max-w-[1600px] mx-auto px-6 md:px-12 pt-28 pb-20 relative'>
+        {/* Hero Section */}
+        {/* <GalleryHero /> */}
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => (
-            <div
-              key={item}
-              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition"
-            >
-              <div className="h-64 bg-gradient-to-br from-orange-200 to-orange-400 flex items-center justify-center">
-                <span className="text-6xl">🕉️</span>
-              </div>
-              <div className="p-4">
-                <h3 className="font-semibold text-gray-800">
-                  Temple Gallery {item}
-                </h3>
-                <p className="text-sm text-gray-600">
-                  Beautiful moments captured
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+        {/* Filters */}
+        <GalleryFilters
+          filters={galleryFilters}
+          activeFilter={activeFilter}
+          onFilterChange={handleFilterChange}
+        />
 
-        <div className="mt-16 text-center">
-          <p className="text-gray-600 mb-4">
-            Note: This is a placeholder gallery. Add your temple photos by
-            placing images in the public folder.
-          </p>
-        </div>
-      </div>
+        {/* Gallery Grid */}
+        <GalleryGrid items={displayedItems} />
 
-      {/* Footer */}
-      <footer className="bg-orange-900 text-white py-12 mt-16">
-        <div className="container mx-auto px-4 text-center">
-          <p>&copy; 2025 Ganesha Temple. All rights reserved.</p>
-        </div>
-      </footer>
+        {/* Load More Button */}
+        <LoadMoreButton onClick={handleLoadMore} hasMore={hasMore} />
+
+        {/* Photography Notice */}
+        <PhotographyNotice />
+      </main>
     </div>
   );
 }

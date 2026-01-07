@@ -86,7 +86,7 @@ export interface DayPanchangResponse extends DayPanchang {
 // Temple location constants
 export const TEMPLE_CONFIG = {
   TIMEZONE: "Asia/Kolkata",
-  LAT: 12.912277012308614,
-  LNG: 77.61337152143297,
+  LAT: 12.9117,
+  LNG: 77.6099,
   CITY: "Bengaluru",
 } as const;

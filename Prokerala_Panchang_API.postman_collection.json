@@ -1,0 +1,130 @@
+{
+  "info": {
+    "name": "Prokerala Panchang API",
+    "description": "Collection for testing Prokerala Panchang API with OAuth2 authentication",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Get OAuth2 Access Token",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Automatically save the access token to environment variable",
+              "if (pm.response.code === 200) {",
+              "    const jsonData = pm.response.json();",
+              "    console.log('Full token response:', JSON.stringify(jsonData, null, 2));",
+              "    ",
+              "    // Check if access_token exists",
+              "    if (jsonData.access_token) {",
+              "        pm.environment.set('access_token', jsonData.access_token);",
+              "        console.log('Access token saved:', jsonData.access_token.substring(0, 20) + '...');",
+              "        ",
+              "        // Validate JWT format (should have 2 dots)",
+              "        const dotCount = (jsonData.access_token.match(/\\./g) || []).length;",
+              "        console.log('JWT dot count:', dotCount, '(should be 2)');",
+              "    } else {",
+              "        console.error('No access_token in response!');",
+              "    }",
+              "} else {",
+              "    console.error('Token request failed:', pm.response.status, pm.response.text());",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "9eoKXW8cMClOfmW4CL3ILKa0TmWmqsDXGFeOxOjU",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "fe15bee3-f877-4632-81b4-5d90e1439694",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "grant_type",
+              "value": "client_credentials",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://api.prokerala.com/token",
+          "protocol": "https",
+          "host": ["api", "prokerala", "com"],
+          "path": ["token"]
+        },
+        "description": "Get OAuth2 access token using client credentials flow.\n\nThis request will automatically save the access token to the environment variable 'access_token' for use in subsequent requests."
+      },
+      "response": []
+    },
+    {
+      "name": "2. Get Panchang for Date",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{access_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.prokerala.com/v2/astrology/panchang?ayanamsa=1&datetime=2026-01-08T06:00:00%2B05:30&coordinates=12.9117,77.6099&la=en",
+          "protocol": "https",
+          "host": ["api", "prokerala", "com"],
+          "path": ["v2", "astrology", "panchang"],
+          "query": [
+            {
+              "key": "ayanamsa",
+              "value": "1",
+              "description": "Ayanamsa system (1 = Lahiri)"
+            },
+            {
+              "key": "datetime",
+              "value": "2026-01-08T06:00:00%2B05:30",
+              "description": "Date and time in ISO 8601 format with timezone (%2B = URL encoded +)"
+            },
+            {
+              "key": "coordinates",
+              "value": "12.9117,77.6099",
+              "description": "Latitude,Longitude (Bangalore coordinates)"
+            },
+            {
+              "key": "la",
+              "value": "en",
+              "description": "Language (en, hi, etc.)"
+            }
+          ]
+        },
+        "description": "Get Panchang data for a specific date and location.\n\n**Prerequisites:**\n1. Run the \"Get OAuth2 Access Token\" request first\n2. The access token will be automatically saved and used here\n\n**Parameters:**\n- ayanamsa: Ayanamsa system (1 = Lahiri)\n- datetime: ISO 8601 format with timezone\n- coordinates: latitude,longitude\n- la: language code"
+      },
+      "response": []
+    }
+  ]
+}

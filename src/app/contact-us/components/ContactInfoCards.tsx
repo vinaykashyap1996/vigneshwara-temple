@@ -1,13 +1,16 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
+import '../../../i18next';
 
 export default function ContactInfoCards() {
+  const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
   const timeoutRef = useRef<number | null>(null);
 
   const address =
-    'No. 123, Temple Street, Malleshwaram, Bangalore - 560003, Karnataka';
+    '3, 26th Main Rd, MCHS Colony, BTM 2nd Stage, BTM Layout, Bengaluru, Karnataka 560076, India';
   const phoneNumber = '+91 98765 43210';
 
   // Cleanup timeout on unmount
@@ -52,7 +55,7 @@ export default function ContactInfoCards() {
       <div className='flex flex-col md:flex-row gap-6 justify-between items-start'>
         <div className='flex-1'>
           <p className='text-muted text-sm uppercase tracking-wider font-bold mb-3'>
-            Temple Address
+            {t('contactUs.info.addressLabel')}
           </p>
           <p className='text-fg text-lg leading-relaxed mb-4'>{address}</p>
           <button
@@ -62,7 +65,7 @@ export default function ContactInfoCards() {
             <span className='material-symbols-outlined text-lg group-hover:scale-110 transition-transform'>
               {copied ? 'check' : 'content_copy'}
             </span>
-            {copied ? 'Copied!' : 'Copy Address'}
+            {copied ? t('contactUs.info.copied') : t('contactUs.info.copyAddress')}
           </button>
         </div>
 
@@ -72,14 +75,14 @@ export default function ContactInfoCards() {
             className='flex-1 md:flex-none h-12 px-6 bg-orange-500 text-white rounded-lg font-bold flex items-center justify-center gap-2 hover:bg-orange-700 transition-colors shadow-md'
             aria-label='Call temple'>
             <span className='material-symbols-outlined'>call</span>
-            Call Now
+            {t('contactUs.info.callNow')}
           </button>
           <button
             onClick={handleWhatsApp}
             className='flex-1 md:flex-none h-12 px-6 bg-green-600 text-white rounded-lg font-bold flex items-center justify-center gap-2 hover:bg-green-700 transition-colors shadow-md'
             aria-label='Contact via WhatsApp'>
             <span className='material-symbols-outlined'>chat</span>
-            WhatsApp
+            {t('contactUs.info.whatsapp')}
           </button>
         </div>
       </div>
@@ -91,7 +94,7 @@ export default function ContactInfoCards() {
             phone
           </span>
           <div>
-            <p className='text-muted text-sm font-medium mb-1'>Phone</p>
+            <p className='text-muted text-sm font-medium mb-1'>{t('contactUs.info.phoneLabel')}</p>
             <a
               href={`tel:${phoneNumber}`}
               className='text-fg hover:text-orange-500 transition-colors'>
@@ -105,7 +108,7 @@ export default function ContactInfoCards() {
             email
           </span>
           <div>
-            <p className='text-muted text-sm font-medium mb-1'>Email</p>
+            <p className='text-muted text-sm font-medium mb-1'>{t('contactUs.info.emailLabel')}</p>
             <a
               href='mailto:info@ganeshatempel.org'
               className='text-fg hover:text-orange-500 transition-colors'>

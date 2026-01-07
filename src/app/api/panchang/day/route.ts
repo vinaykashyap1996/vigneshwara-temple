@@ -42,7 +42,6 @@ export async function GET(request: NextRequest) {
 
     // Fetch day data
     const dayData = await fetchDayPanchang(date);
-    console.log("🚀 ~ GET ~ dayData:", dayData)
 
     return NextResponse.json(dayData, {
       headers: {
@@ -51,7 +50,6 @@ export async function GET(request: NextRequest) {
     });
   } catch (error) {
     console.error("Error in /api/panchang/day:", error);
-
     return NextResponse.json(
       {
         error: "Failed to fetch day panchang data",

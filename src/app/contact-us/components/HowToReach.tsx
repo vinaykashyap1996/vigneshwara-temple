@@ -1,22 +1,26 @@
+'use client';
+
+import { useTranslation } from 'react-i18next';
+import '../../../i18next';
+
 export default function HowToReach() {
+  const { t } = useTranslation();
+
   const transportOptions = [
     {
       icon: 'subway',
-      title: 'By Metro',
-      description:
-        'Nearest Station: Mantri Square Sampige Road (Green Line). Just a 500m walk.',
+      titleKey: 'contactUs.howToReach.metro.title',
+      descriptionKey: 'contactUs.howToReach.metro.description',
     },
     {
       icon: 'directions_bus',
-      title: 'By Bus',
-      description:
-        'Stop: 8th Cross Malleshwaram. Frequent buses (276, 90E) available from Majestic.',
+      titleKey: 'contactUs.howToReach.bus.title',
+      descriptionKey: 'contactUs.howToReach.bus.description',
     },
     {
       icon: 'local_parking',
-      title: 'Parking',
-      description:
-        'Dedicated 2-wheeler parking inside. Car parking available on the adjacent 11th cross street.',
+      titleKey: 'contactUs.howToReach.parking.title',
+      descriptionKey: 'contactUs.howToReach.parking.description',
     },
   ];
 
@@ -26,7 +30,7 @@ export default function HowToReach() {
         <span className="material-symbols-outlined text-orange-500 text-2xl">
           directions
         </span>
-        How to Reach
+        {t('contactUs.howToReach.title')}
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -38,9 +42,9 @@ export default function HowToReach() {
             <div className="size-10 rounded-full bg-white flex items-center justify-center text-orange-500 mb-4 border border-border shadow-sm">
               <span className="material-symbols-outlined">{option.icon}</span>
             </div>
-            <h3 className="text-fg font-bold mb-2">{option.title}</h3>
+            <h3 className="text-fg font-bold mb-2">{t(option.titleKey)}</h3>
             <p className="text-muted text-sm leading-relaxed">
-              {option.description}
+              {t(option.descriptionKey)}
             </p>
           </div>
         ))}

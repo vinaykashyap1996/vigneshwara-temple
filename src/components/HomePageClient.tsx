@@ -25,7 +25,7 @@ export default function HomePageClient() {
             {/* Image wrapper becomes positioning context */}
             <div className='relative w-full max-w-4xl aspect-[4/3]'>
               <Image
-                src='/vighneshwara.webp'
+                src='/vigneshwara.png'
                 alt='Vigneshwara Temple'
                 className='rounded-xl object-cover'
                 fill

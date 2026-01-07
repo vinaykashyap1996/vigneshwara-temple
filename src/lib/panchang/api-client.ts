@@ -8,8 +8,8 @@
  *
  * To use Prokerala API:
  * 1. Sign up at https://www.prokerala.com/api/
- * 2. Get your API key
- * 3. Add PANCHANG_API_KEY to .env.local
+ * 2. Get your OAuth2 credentials
+ * 3. Add PANCHANG_CLIENT_ID and PANCHANG_CLIENT_SECRET to .env.local
  */
 
 import {
@@ -89,12 +89,18 @@ export async function fetchDayPanchang(
 ): Promise<DayPanchangResponse> {
   const clientId = process.env.PANCHANG_CLIENT_ID;
   const clientSecret = process.env.PANCHANG_CLIENT_SECRET;
+  const isSandbox = process.env.PANCHANG_SANDBOX === 'true';
   const [year, month, day] = date.split("-").map(Number);
+
+  console.log("🔑 Environment variables check:");
+  console.log("  - PANCHANG_CLIENT_ID:", clientId ? `${clientId.substring(0, 10)}...` : "NOT SET");
+  console.log("  - PANCHANG_CLIENT_SECRET:", clientSecret ? "SET (hidden)" : "NOT SET");
+  console.log("  - PANCHANG_SANDBOX:", isSandbox);
 
   // Check if we have OAuth credentials
   if (!clientId || !clientSecret) {
     console.warn(
-      "PANCHANG_CLIENT_ID or PANCHANG_CLIENT_SECRET not set. Using fallback data. Please add to .env.local"
+      "❌ PANCHANG_CLIENT_ID or PANCHANG_CLIENT_SECRET not set. Using fallback data. Please add to .env.local"
     );
     return getFallbackDayData(date, year, month, day);
   }
@@ -103,8 +109,18 @@ export async function fetchDayPanchang(
   const baseUrl = "https://api.prokerala.com/v2/astrology/panchang";
   const url = new URL(baseUrl);
 
+  // In sandbox mode, Prokerala only allows January 1st (any year, any time)
+  // In production, use the actual date
+  const apiDate = isSandbox ? `${year}-01-01` : date;
+  console.log("🚀 ~ fetchDayPanchang ~ apiDate:", apiDate)
+
+  if (isSandbox) {
+    console.log(`Sandbox mode: Using ${apiDate} instead of ${date} for API call`);
+  }
+
+  console.log("🚀 ~ fetchDayPanchang ~ Fetching panchang for date:", apiDate);
   url.searchParams.append("ayanamsa", "1"); // Lahiri ayanamsa
-  url.searchParams.append("datetime", `${date}T06:00:00`);
+  url.searchParams.append("datetime", `${apiDate}T06:00:00+05:30`); // ISO 8601 with timezone
   url.searchParams.append("coordinates", `${TEMPLE_CONFIG.LAT},${TEMPLE_CONFIG.LNG}`);
   url.searchParams.append("la", "en"); // Language
 
@@ -136,7 +152,6 @@ export async function fetchDayPanchang(
       throw new Error(`API error: ${data.errors?.[0]?.detail || 'Unknown error'}`);
     }
 
-    // Normalize the API response to our DayPanchangResponse format
     return normalizeDayResponse(data, date, year, month, day);
   } catch (error) {
     console.error("Error fetching day panchang:", error);
@@ -150,17 +165,19 @@ export async function fetchDayPanchang(
  * Fetch Panchang data for an entire month
  * 
  * Rate limit handling:
- * - Batch size of 5 concurrent requests to avoid overwhelming the Prokerala API
- * - 200ms delay between batches to stay within rate limits
+ * - Prokerala free tier: 5 requests per 60 seconds
+ * - Batch size of 4 requests with 15 second delay between batches
  * - Uses Promise.allSettled to handle transient failures gracefully
+ * 
+ * Note: Fetching a full month will take ~2 minutes (31 days = 8 batches)
  */
 export async function fetchMonthPanchang(
   year: number,
   month: number // 1-12
 ): Promise<DayPanchang[]> {
   const daysInMonth = new Date(year, month, 0).getDate();
-  const BATCH_SIZE = 5; // Limit concurrent requests to avoid rate limits
-  const BATCH_DELAY = 200; // 200ms delay between batches
+  const BATCH_SIZE = 4; // Stay under 5 req/min limit
+  const BATCH_DELAY = 15000; // 15 seconds between batches (safer than 12s)
   const allResults: DayPanchang[] = [];
 
   // Build all date strings
@@ -398,6 +415,6 @@ function getFallbackDayData(
     month,
     year,
     isCurrentMonth: true,
-    notes: "API key not configured or service unavailable. Please add PANCHANG_API_KEY to .env.local",
+    notes: "API credentials not configured or service unavailable. Please add PANCHANG_CLIENT_ID and PANCHANG_CLIENT_SECRET to .env.local",
   };
 }

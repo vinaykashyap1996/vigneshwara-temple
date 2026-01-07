@@ -53,13 +53,14 @@ export async function getDayPanchang(
         revalidate: 21600, // 6 hours
       },
     });
-    console.log("🚀 ~ getDayPanchang ~ response:", response)
 
     if (!response.ok) {
       throw new Error(`Failed to fetch day data: ${response.statusText}`);
     }
+    const responseData = await response.json();
+    console.log("🚀 ~ getDayPanchang ~ response:", responseData)
 
-    return await response.json();
+    return responseData;
   } catch (error) {
     console.error("Error fetching day panchang:", error);
     throw error;

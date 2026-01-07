@@ -25,8 +25,8 @@ export default function Navbar() {
             <Link href='/events' className='hover:text-orange-200 transition'>
               {t('nav.events')}
             </Link>
-            <Link href='/sankalpa' className='hover:text-orange-200 transition'>
-              {t('nav.sankalpa')}
+            <Link href='/sevas' className='hover:text-orange-200 transition'>
+              {t('nav.sevas')}
             </Link>
             <Link href='/gallery' className='hover:text-orange-200 transition'>
               {t('nav.gallery')}

@@ -74,5 +74,350 @@
     "email": "Email",
     "message": "Message",
     "send": "Send Message"
+  },
+  "sevas": {
+    "title": "Sacred Sevas",
+    "subtitle": "Participate in divine rituals and sacred services. Book archana, abhishekam, alankara, and special pujas for Lord Ganesha.",
+    "badge": "Temple Services",
+    "bookButton": "Book a Seva",
+    "viewFestivalSevas": "View Festival Sevas",
+    "featuredTitle": "Featured Sevas",
+    "featuredSubtitle": "Most popular and auspicious services for divine blessings",
+    "searchPlaceholder": "Search sevas...",
+    "filters": {
+      "category": "Category",
+      "timing": "Timing",
+      "all": "All Sevas",
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly",
+      "festival": "Festival",
+      "special": "Special",
+      "anyTime": "Any Time",
+      "morning": "Morning",
+      "evening": "Evening",
+      "fullDay": "Full Day"
+    },
+    "card": {
+      "from": "From",
+      "recommended": "Recommended",
+      "viewDetails": "View Details",
+      "bookNow": "Book Now"
+    },
+    "howItWorks": {
+      "title": "How Booking Works",
+      "subtitle": "Simple steps to participate in sacred temple services",
+      "step1": {
+        "title": "Select Your Seva",
+        "description": "Browse through our catalog and choose the seva that resonates with your intention and requirements."
+      },
+      "step2": {
+        "title": "Choose Date & Time",
+        "description": "Pick a convenient date and time slot. Our priests will guide you on the most auspicious muhurta."
+      },
+      "step3": {
+        "title": "Confirm Your Booking",
+        "description": "Complete your booking with donation details. Receive confirmation and preparation instructions."
+      },
+      "guidelines": {
+        "title": "Important Guidelines",
+        "arrival": "Please arrive 15 minutes before the scheduled time",
+        "attire": "Traditional attire is recommended for all temple services",
+        "prasadam": "Prasadam will be distributed after completion of each seva",
+        "photography": "Photography during puja requires prior permission from temple office"
+      }
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "Everything you need to know about booking and participating in sevas",
+      "stillHaveQuestions": "Still have questions?",
+      "contactMessage": "Our temple office is here to help you with any queries",
+      "call": "Call",
+      "contactUs": "Contact Us",
+      "items": [
+        {
+          "question": "Can I cancel or reschedule my seva booking?",
+          "answer": "Yes, you can reschedule your seva up to 24 hours before the scheduled time by contacting the temple office. Cancellations are accepted with a minimum 48-hour notice. Please call us at +91 (555) 123-4567 for assistance."
+        },
+        {
+          "question": "What is the dress code for attending sevas?",
+          "answer": "Traditional Indian attire is recommended. Men should wear dhoti-kurta or shirt-pants with angavastram. Women should wear saree, salwar kameez, or churidar. Please avoid shorts, sleeveless tops, and leather items inside the temple."
+        },
+        {
+          "question": "Will I receive prasadam after the seva?",
+          "answer": "Yes, blessed prasadam is distributed to all participants after the completion of every seva. The type of prasadam varies based on the seva - it could be modaks, panchamrit, fruits, or specially prepared temple offerings."
+        },
+        {
+          "question": "Can family members participate in the seva?",
+          "answer": "Absolutely! Family participation is encouraged and considered highly auspicious. Please inform us about the number of family members during booking so we can make proper arrangements. Children are welcome under adult supervision."
+        },
+        {
+          "question": "Is advance booking mandatory?",
+          "answer": "For special sevas like Sahasranama Archana, Homam, and festival celebrations, advance booking is mandatory. For daily sevas like regular Archana and Abhishekam, walk-in participation is allowed subject to availability."
+        },
+        {
+          "question": "What payment methods do you accept?",
+          "answer": "We accept cash, UPI payments, bank transfers, and online donations through our website. You can also sponsor sevas through check or demand draft payable to \"Shri Vighneshwara Swamy Temple Trust\"."
+        },
+        {
+          "question": "Are there any special sevas for specific occasions?",
+          "answer": "Yes, we offer customized sevas for birthdays, anniversaries, house warming (Grihapravesh), business inauguration, and other special occasions. Please contact our office to discuss your requirements and we'll arrange appropriate rituals."
+        },
+        {
+          "question": "Can I participate in the actual ritual or just observe?",
+          "answer": "Participation level varies by seva type. For Archana and some pujas, you can actively participate under priest guidance. For technical rituals like Homam, observation is recommended unless you have prior experience. Our priests will guide you appropriately."
+        }
+      ]
+    },
+    "notice": {
+      "title": "Temple Notice",
+      "content1": "All sevas are conducted by experienced temple priests following traditional Vedic rituals and mantras. We maintain the highest standards of sanctity and devotion in all our services.",
+      "content2": "Devotees are requested to maintain silence and devotional atmosphere during rituals. Mobile phones should be switched to silent mode inside the temple premises.",
+      "content3": "For special occasions, festivals, or large group bookings, please contact the temple office at least one week in advance for proper arrangements.",
+      "blessing": "May Lord Ganesha bless all devotees with peace, prosperity, and spiritual growth. 🙏"
+    },
+    "detail": {
+      "breadcrumb": {
+        "home": "Home",
+        "sevas": "Sevas"
+      },
+      "about": "About This Seva",
+      "benefits": "Divine Benefits",
+      "requirements": "Requirements & Preparation",
+      "related": "Related Sevas",
+      "suggestedDonation": "Suggested Donation",
+      "minimum": "Minimum",
+      "duration": "Duration",
+      "frequency": "Frequency",
+      "available": "Available",
+      "needAssistance": "Need Assistance?",
+      "contactOffice": "Contact our temple office for booking help"
+    },
+    "booking": {
+      "fullName": "Full Name",
+      "email": "Email",
+      "phone": "Phone Number",
+      "date": "Preferred Date",
+      "timing": "Preferred Timing",
+      "selectTiming": "Select timing",
+      "participants": "Number of Participants",
+      "specialRequests": "Special Requests (Optional)",
+      "placeholder": "Any specific requirements or questions...",
+      "submit": "Book This Seva",
+      "confirmation": "You will receive confirmation via email and phone"
+    },
+    "showingResults": "Showing {{count}} of {{total}} sevas",
+    "noResults": {
+      "title": "No sevas found",
+      "message": "Try adjusting your filters or search query"
+    }
+  },
+  "aboutUs": {
+    "hero": {
+      "title": "A Sanctuary of Peace",
+      "subtitle": "Dedicated to Lord Vighneshwara, guiding devotees towards spiritual enlightenment in the heart of Bangalore since 1985.",
+      "exploreButton": "Explore Our History"
+    },
+    "deity": {
+      "badge": "The Presiding Deity",
+      "title": "Remover of Obstacles",
+      "description": "Lord Ganesha, also known as Vighneshwara, is revered as the patron of arts and sciences and the deva of intellect and wisdom. As the god of beginnings, he is honoured at the start of rituals and ceremonies. In our temple, the Moolavar (main deity) is depicted in a seated posture, radiating calmness and benevolence to all who seek his blessings.",
+      "readMythology": "Read Mythology"
+    },
+    "attributes": {
+      "wisdom": {
+        "title": "Wisdom (Buddhi)",
+        "description": "Guiding devotees through life's challenges with divine intellect and clarity of thought."
+      },
+      "prosperity": {
+        "title": "Prosperity (Riddhi)",
+        "description": "Bestowing material and spiritual abundance upon sincere seekers and devotees."
+      },
+      "newBeginnings": {
+        "title": "New Beginnings",
+        "description": "Blessing every new venture, business, or life stage with success and harmony."
+      }
+    },
+    "values": {
+      "title": "Our Core Values",
+      "subtitle": "The temple operates not just as a place of worship, but as a center for cultural preservation and community service.",
+      "dharma": {
+        "title": "Dharma",
+        "description": "Upholding righteousness"
+      },
+      "seva": {
+        "title": "Seva",
+        "description": "Selfless service to all"
+      },
+      "bhakti": {
+        "title": "Bhakti",
+        "description": "Unwavering devotion"
+      },
+      "sanskriti": {
+        "title": "Sanskriti",
+        "description": "Preserving culture"
+      }
+    },
+    "timeline": {
+      "title": "Our Journey Through Time",
+      "milestones": {
+        "1985": {
+          "year": "1985 - Foundation",
+          "description": "Established by a group of devoted residents in a small temporary structure. The first idol was installed with simple rites, marking the beginning of a spiritual hub."
+        },
+        "1995": {
+          "year": "1995 - Maha Kumbhabhishekam",
+          "description": "First major consecration ceremony attended by thousands. The main Gopuram was constructed, and the sanctum sanctorum was formalized according to Agama Shastras."
+        },
+        "2010": {
+          "year": "2010 - Annadana Hall Expansion",
+          "description": "New hall dedicated to daily food distribution service. This allowed the temple to serve over 500 devotees daily with wholesome prasadam."
+        },
+        "2023": {
+          "year": "2023 - Renovation & Gold Plating",
+          "description": "Recent structural upgrades to the main sanctum, including the gold plating of the Vimana, enhancing the divine vibration of the temple premises."
+        }
+      }
+    },
+    "community": {
+      "title": "Serving the Community",
+      "subtitle": "Extending the grace of God through human hands.",
+      "vedaPathashala": {
+        "title": "Veda Pathashala",
+        "description": "Daily evening classes for children to learn Vedic chanting and traditional slokas, preserving our ancient oral heritage.",
+        "link": "View Schedule"
+      },
+      "annadanam": {
+        "title": "Nitya Annadanam",
+        "description": "Providing free, nutritious meals to all visitors every afternoon. No one leaves the temple hungry.",
+        "link": "Donate Now"
+      }
+    }
+  },
+  "contactUs": {
+    "form": {
+      "title": "Send an Enquiry",
+      "subtitle": "Have questions about Sevas or events? Reach out to us.",
+      "fullName": "Full Name",
+      "phoneNumber": "Phone Number",
+      "purpose": "Purpose",
+      "message": "Message",
+      "purposeOptions": {
+        "general": "General Enquiry",
+        "seva": "Seva Booking",
+        "donation": "Donation",
+        "volunteering": "Volunteering"
+      },
+      "namePlaceholder": "Enter your name",
+      "phonePlaceholder": "+91 98765 43210",
+      "messagePlaceholder": "How can we help you?",
+      "sendButton": "Send Message",
+      "sending": "Sending...",
+      "successMessage": "Thank you! Your message has been sent successfully.",
+      "errorMessage": "Something went wrong. Please try again later."
+    },
+    "info": {
+      "addressLabel": "Temple Address",
+      "copyAddress": "Copy Address",
+      "copied": "Copied!",
+      "callNow": "Call Now",
+      "whatsapp": "WhatsApp",
+      "phoneLabel": "Phone",
+      "emailLabel": "Email"
+    },
+    "darshanTimings": {
+      "title": "Darshan Timings",
+      "morning": "Morning",
+      "evening": "Evening",
+      "morningTime": "6:00 AM – 12:30 PM",
+      "eveningTime": "5:30 PM – 9:00 PM",
+      "abhishekam": "Abhishekam: Daily at 8:30 AM"
+    },
+    "howToReach": {
+      "title": "How to Reach",
+      "metro": {
+        "title": "By Metro",
+        "description": "Nearest Station: Jayadeva Hospital (Purple Line), approximately 3 km away. Auto-rickshaws readily available."
+      },
+      "bus": {
+        "title": "By Bus",
+        "description": "Stop: BTM 2nd Stage. Well connected via BMTC buses including routes G-4, 500K, 500D, V-500C from major hubs."
+      },
+      "parking": {
+        "title": "Parking",
+        "description": "Dedicated parking available for 2-wheelers and 4-wheelers. Additional street parking on 26th Main Road."
+      }
+    },
+    "map": {
+      "title": "Locate Us",
+      "openInMaps": "Open in Google Maps"
+    }
+  },
+  "donations": {
+    "hero": {
+      "badge": "Support Our Temple",
+      "title": "Make a Donation",
+      "subtitle": "Your contribution helps us maintain the temple, conduct daily rituals, and serve the community."
+    },
+    "causes": {
+      "title": "Choose a Cause",
+      "maintenance": "Temple Maintenance",
+      "annadanam": "Annadanam (Free Meals)",
+      "festivals": "Festival Celebrations",
+      "education": "Vedic Education",
+      "custom": "Custom Donation"
+    },
+    "amount": {
+      "title": "Select Amount",
+      "custom": "Custom Amount",
+      "placeholder": "Enter custom amount"
+    },
+    "donorInfo": {
+      "title": "Your Information",
+      "fullName": "Full Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "taxReceipt": "I need an 80G tax receipt",
+      "panNumber": "PAN Number",
+      "namePlaceholder": "Enter your full name",
+      "emailPlaceholder": "you@example.com",
+      "phonePlaceholder": "+91 98765 43210",
+      "panPlaceholder": "ABCDE1234F"
+    },
+    "summary": {
+      "title": "Donation Summary",
+      "cause": "Cause",
+      "amount": "Amount",
+      "taxBenefit": "Tax Benefit (80G)",
+      "youSave": "You save approximately"
+    },
+    "payment": {
+      "title": "Payment Method",
+      "upi": "UPI",
+      "card": "Card",
+      "netBanking": "Net Banking",
+      "donateButton": "Proceed to Donate",
+      "securePayment": "Secure payment via Razorpay"
+    },
+    "trust": {
+      "registered": "80G Registered",
+      "secure": "Secure Payments",
+      "transparent": "100% Transparent"
+    }
+  },
+  "gallery": {
+    "filters": {
+      "all": "All",
+      "festivals": "Festivals",
+      "daily": "Daily Rituals",
+      "architecture": "Architecture",
+      "events": "Special Events"
+    },
+    "loadMore": "Load More Photos",
+    "noMore": "No more photos to load",
+    "notice": {
+      "title": "Photography Guidelines",
+      "content": "Photography is allowed in common areas. Please avoid flash photography during rituals and seek permission before photographing priests or devotees."
+    }
   }
 }

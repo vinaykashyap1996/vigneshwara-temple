@@ -1,6 +1,12 @@
+'use client';
+
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
+import '../../i18next';
 
 export default function AboutUs() {
+  const { t } = useTranslation();
+
   return (
     <div className='relative flex min-h-screen w-full flex-col overflow-x-hidden bg-ivory'>
       {/* Hero Section */}
@@ -17,16 +23,14 @@ export default function AboutUs() {
                 <div className='absolute inset-0 bg-black/20'></div>
                 <div className='relative z-10 flex flex-col gap-4 text-center max-w-[700px]'>
                   <h1 className='text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-6xl drop-shadow-lg'>
-                    A Sanctuary of Peace
+                    {t('aboutUs.hero.title')}
                   </h1>
                   <h2 className='text-gray-200 text-base font-normal leading-relaxed @[480px]:text-xl drop-shadow-md'>
-                    Dedicated to Lord Vighneshwara, guiding devotees towards
-                    spiritual enlightenment in the heart of Bangalore since
-                    1985.
+                    {t('aboutUs.hero.subtitle')}
                   </h2>
                 </div>
                 <button className='relative z-10 flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-orange-600 text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-orange-700 hover:text-white transition-all duration-300 shadow-lg'>
-                  <span className='truncate'>Explore Our History</span>
+                  <span className='truncate'>{t('aboutUs.hero.exploreButton')}</span>
                 </button>
               </div>
             </div>
@@ -42,18 +46,13 @@ export default function AboutUs() {
               <div className='flex flex-col gap-6 flex-1'>
                 <div className='flex flex-col gap-4'>
                   <h2 className='text-orange-600 text-sm font-bold uppercase tracking-widest'>
-                    The Presiding Deity
+                    {t('aboutUs.deity.badge')}
                   </h2>
                   <h1 className='text-fg tracking-tight text-[32px] font-bold leading-tight @[480px]:text-4xl max-w-[720px]'>
-                    Remover of Obstacles
+                    {t('aboutUs.deity.title')}
                   </h1>
                   <p className='text-muted text-lg font-normal leading-relaxed'>
-                    Lord Ganesha, also known as Vighneshwara, is revered as the
-                    patron of arts and sciences and the deva of intellect and
-                    wisdom. As the god of beginnings, he is honoured at the
-                    start of rituals and ceremonies. In our temple, the Moolavar
-                    (main deity) is depicted in a seated posture, radiating
-                    calmness and benevolence to all who seek his blessings.
+                    {t('aboutUs.deity.description')}
                   </p>
                 </div>
                 <div className='flex gap-4 pt-2'>
@@ -63,7 +62,7 @@ export default function AboutUs() {
                     <span className='material-symbols-outlined'>
                       auto_stories
                     </span>
-                    <span>Read Mythology</span>
+                    <span>{t('aboutUs.deity.readMythology')}</span>
                   </Link>
                 </div>
               </div>
@@ -85,11 +84,10 @@ export default function AboutUs() {
                 </div>
                 <div className='flex flex-col gap-2'>
                   <h2 className='text-fg text-lg font-bold leading-tight'>
-                    Wisdom (Buddhi)
+                    {t('aboutUs.attributes.wisdom.title')}
                   </h2>
                   <p className='text-muted text-sm font-normal leading-normal'>
-                    Guiding devotees through life&apos;s challenges with divine
-                    intellect and clarity of thought.
+                    {t('aboutUs.attributes.wisdom.description')}
                   </p>
                 </div>
               </div>
@@ -101,11 +99,10 @@ export default function AboutUs() {
                 </div>
                 <div className='flex flex-col gap-2'>
                   <h2 className='text-fg text-lg font-bold leading-tight'>
-                    Prosperity (Riddhi)
+                    {t('aboutUs.attributes.prosperity.title')}
                   </h2>
                   <p className='text-muted text-sm font-normal leading-normal'>
-                    Bestowing material and spiritual abundance upon sincere
-                    seekers and devotees.
+                    {t('aboutUs.attributes.prosperity.description')}
                   </p>
                 </div>
               </div>
@@ -117,11 +114,10 @@ export default function AboutUs() {
                 </div>
                 <div className='flex flex-col gap-2'>
                   <h2 className='text-fg text-lg font-bold leading-tight'>
-                    New Beginnings
+                    {t('aboutUs.attributes.newBeginnings.title')}
                   </h2>
                   <p className='text-muted text-sm font-normal leading-normal'>
-                    Blessing every new venture, business, or life stage with
-                    success and harmony.
+                    {t('aboutUs.attributes.newBeginnings.description')}
                   </p>
                 </div>
               </div>
@@ -134,11 +130,10 @@ export default function AboutUs() {
       <div className='w-full bg-orange-50 py-16 md:px-40 px-4 border-y border-border'>
         <div className='flex flex-col items-center justify-center max-w-[960px] mx-auto text-center gap-8'>
           <h2 className='text-fg text-3xl font-bold leading-tight'>
-            Our Core Values
+            {t('aboutUs.values.title')}
           </h2>
           <p className='text-muted max-w-2xl text-lg'>
-            The temple operates not just as a place of worship, but as a center
-            for cultural preservation and community service.
+            {t('aboutUs.values.subtitle')}
           </p>
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full mt-4'>
             <div className='flex flex-col items-center gap-3 p-4'>
@@ -147,8 +142,8 @@ export default function AboutUs() {
                   balance
                 </span>
               </div>
-              <h3 className='text-fg font-bold text-lg'>Dharma</h3>
-              <p className='text-muted text-sm'>Upholding righteousness</p>
+              <h3 className='text-fg font-bold text-lg'>{t('aboutUs.values.dharma.title')}</h3>
+              <p className='text-muted text-sm'>{t('aboutUs.values.dharma.description')}</p>
             </div>
             <div className='flex flex-col items-center gap-3 p-4'>
               <div className='size-16 rounded-full bg-white border border-orange-500/30 flex items-center justify-center text-orange-600 shadow-sm'>
@@ -156,8 +151,8 @@ export default function AboutUs() {
                   volunteer_activism
                 </span>
               </div>
-              <h3 className='text-fg font-bold text-lg'>Seva</h3>
-              <p className='text-muted text-sm'>Selfless service to all</p>
+              <h3 className='text-fg font-bold text-lg'>{t('aboutUs.values.seva.title')}</h3>
+              <p className='text-muted text-sm'>{t('aboutUs.values.seva.description')}</p>
             </div>
             <div className='flex flex-col items-center gap-3 p-4'>
               <div className='size-16 rounded-full bg-white border border-orange-500/30 flex items-center justify-center text-orange-600 shadow-sm'>
@@ -165,8 +160,8 @@ export default function AboutUs() {
                   self_improvement
                 </span>
               </div>
-              <h3 className='text-fg font-bold text-lg'>Bhakti</h3>
-              <p className='text-muted text-sm'>Unwavering devotion</p>
+              <h3 className='text-fg font-bold text-lg'>{t('aboutUs.values.bhakti.title')}</h3>
+              <p className='text-muted text-sm'>{t('aboutUs.values.bhakti.description')}</p>
             </div>
             <div className='flex flex-col items-center gap-3 p-4'>
               <div className='size-16 rounded-full bg-white border border-orange-500/30 flex items-center justify-center text-orange-600 shadow-sm'>
@@ -174,8 +169,8 @@ export default function AboutUs() {
                   diversity_3
                 </span>
               </div>
-              <h3 className='text-fg font-bold text-lg'>Sanskriti</h3>
-              <p className='text-muted text-sm'>Preserving culture</p>
+              <h3 className='text-fg font-bold text-lg'>{t('aboutUs.values.sanskriti.title')}</h3>
+              <p className='text-muted text-sm'>{t('aboutUs.values.sanskriti.description')}</p>
             </div>
           </div>
         </div>
@@ -185,7 +180,7 @@ export default function AboutUs() {
       <div className='flex justify-center px-4 py-10 md:px-40'>
         <div className='layout-content-container flex flex-col max-w-[960px] w-full'>
           <h2 className='text-fg text-[28px] font-bold leading-tight tracking-[-0.015em] px-4 pb-8 pt-5 text-center'>
-            Our Journey Through Time
+            {t('aboutUs.timeline.title')}
           </h2>
           <div className='grid grid-cols-[40px_1fr] gap-x-6 px-4'>
             {/* Item 1 */}
@@ -200,12 +195,10 @@ export default function AboutUs() {
             </div>
             <div className='flex flex-1 flex-col py-3 pb-10'>
               <p className='text-orange-600 text-lg font-bold leading-normal'>
-                1985 - Foundation
+                {t('aboutUs.timeline.milestones.1985.year')}
               </p>
               <p className='text-muted text-base font-normal leading-relaxed mt-1'>
-                Established by a group of devoted residents in a small temporary
-                structure. The first idol was installed with simple rites,
-                marking the beginning of a spiritual hub.
+                {t('aboutUs.timeline.milestones.1985.description')}
               </p>
             </div>
 
@@ -222,12 +215,10 @@ export default function AboutUs() {
             </div>
             <div className='flex flex-1 flex-col py-3 pb-10'>
               <p className='text-orange-600 text-lg font-bold leading-normal'>
-                1995 - Maha Kumbhabhishekam
+                {t('aboutUs.timeline.milestones.1995.year')}
               </p>
               <p className='text-muted text-base font-normal leading-relaxed mt-1'>
-                First major consecration ceremony attended by thousands. The
-                main Gopuram was constructed, and the sanctum sanctorum was
-                formalized according to Agama Shastras.
+                {t('aboutUs.timeline.milestones.1995.description')}
               </p>
             </div>
 
@@ -244,12 +235,10 @@ export default function AboutUs() {
             </div>
             <div className='flex flex-1 flex-col py-3 pb-10'>
               <p className='text-orange-600 text-lg font-bold leading-normal'>
-                2010 - Annadana Hall Expansion
+                {t('aboutUs.timeline.milestones.2010.year')}
               </p>
               <p className='text-muted text-base font-normal leading-relaxed mt-1'>
-                New hall dedicated to daily food distribution service. This
-                allowed the temple to serve over 500 devotees daily with
-                wholesome prasadam.
+                {t('aboutUs.timeline.milestones.2010.description')}
               </p>
             </div>
 
@@ -265,12 +254,10 @@ export default function AboutUs() {
             </div>
             <div className='flex flex-1 flex-col py-3'>
               <p className='text-orange-600 text-lg font-bold leading-normal'>
-                2023 - Renovation &amp; Gold Plating
+                {t('aboutUs.timeline.milestones.2023.year')}
               </p>
               <p className='text-muted text-base font-normal leading-relaxed mt-1'>
-                Recent structural upgrades to the main sanctum, including the
-                gold plating of the Vimana, enhancing the divine vibration of
-                the temple premises.
+                {t('aboutUs.timeline.milestones.2023.description')}
               </p>
             </div>
           </div>
@@ -282,10 +269,10 @@ export default function AboutUs() {
         <div className='max-w-[960px] w-full'>
           <div className='flex flex-col gap-2 mb-8'>
             <h2 className='text-fg text-[28px] font-bold leading-tight'>
-              Serving the Community
+              {t('aboutUs.community.title')}
             </h2>
             <p className='text-muted'>
-              Extending the grace of God through human hands.
+              {t('aboutUs.community.subtitle')}
             </p>
           </div>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
@@ -298,16 +285,15 @@ export default function AboutUs() {
                 }}></div>
               <div className='p-6 flex flex-col justify-center flex-1'>
                 <h3 className='text-fg font-bold text-lg mb-2'>
-                  Veda Pathashala
+                  {t('aboutUs.community.vedaPathashala.title')}
                 </h3>
                 <p className='text-muted text-sm mb-4'>
-                  Daily evening classes for children to learn Vedic chanting and
-                  traditional slokas, preserving our ancient oral heritage.
+                  {t('aboutUs.community.vedaPathashala.description')}
                 </p>
                 <Link
                   className='text-orange-600 text-sm font-bold hover:underline'
                   href='/programs/veda-pathashala'>
-                  View Schedule →
+                  {t('aboutUs.community.vedaPathashala.link')} →
                 </Link>
               </div>
             </div>
@@ -320,16 +306,15 @@ export default function AboutUs() {
                 }}></div>
               <div className='p-6 flex flex-col justify-center flex-1'>
                 <h3 className='text-fg font-bold text-lg mb-2'>
-                  Nitya Annadanam
+                  {t('aboutUs.community.annadanam.title')}
                 </h3>
                 <p className='text-muted text-sm mb-4'>
-                  Providing free, nutritious meals to all visitors every
-                  afternoon. No one leaves the temple hungry.
+                  {t('aboutUs.community.annadanam.description')}
                 </p>
                 <Link
                   className='text-orange-600 text-sm font-bold hover:underline'
                   href='/donations'>
-                  Donate Now →
+                  {t('aboutUs.community.annadanam.link')} →
                 </Link>
               </div>
             </div>

@@ -27,11 +27,11 @@ export default function ContactClient() {
                     {t("contact.address")}
                   </h3>
                   <p className="text-gray-700">
-                    123 Temple Street
+                    3, 26th Main Rd, MCHS Colony
                     <br />
-                    Your City, State 12345
+                    BTM 2nd Stage, BTM Layout
                     <br />
-                    United States
+                    Bengaluru, Karnataka 560076, India
                   </p>
                 </div>
               </div>
