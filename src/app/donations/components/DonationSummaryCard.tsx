@@ -26,7 +26,7 @@ export default function DonationSummaryCard({
     if (cause === 'custom' && customCauseText) {
       return customCauseText;
     }
-    return t(`causes.${cause}`);
+    return t(`donations.causes.${cause}`);
   };
 
   return (

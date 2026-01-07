@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 import LanguageSwitcher from './LanguageSwitcher';
 import '../i18next';
+import Image from 'next/image';
 
 export default function Navbar() {
   const { t } = useTranslation();
@@ -13,7 +14,7 @@ export default function Navbar() {
       <div className='container mx-auto px-4 py-4'>
         <div className='flex items-center justify-between'>
           <Link href='/' className='text-2xl font-bold'>
-            🕉️ {t('temple')}
+            <Image src='/logo.png' alt='Logo' width={100} height={20} />
           </Link>
           <div className='hidden md:flex space-x-6 items-center'>
             <Link href='/' className='hover:text-orange-200 transition'>

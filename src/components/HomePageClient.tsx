@@ -6,6 +6,7 @@ import SankalpaSection from '@/components/SankalpaSection';
 import '../i18next';
 import ActionCard from './ActionCard';
 import Image from 'next/image';
+import { Landmark, Sparkles, HandHeart, CalendarDays } from 'lucide-react';
 
 export default function HomePageClient() {
   const { t } = useTranslation();
@@ -40,31 +41,35 @@ export default function HomePageClient() {
       <section className='section'>
         <div className='container-page'>
           <div className='h3'>
-            <p className='mb-4'>Quick Actions</p>
-            <div className='flex gap-6 flex-wrap items-center justify-center'>
+            <p className='mb-8 text-center'>Quick Actions</p>
+            <div className='flex gap-6 flex-wrap items-stretch justify-center'>
               <ActionCard
                 key='temple'
-                icon='temple_hindu'
+                icon={Landmark}
                 title='Explore Temples'
                 description='Discover sacred spaces and divine architecture.'
+                href='/about-us'
               />
               <ActionCard
                 key='puja'
-                icon='spa'
+                icon={Sparkles}
                 title='Book Puja'
                 description='Schedule religious ceremonies and offerings.'
+                href='/sevas'
               />
               <ActionCard
                 key='donate'
-                icon='volunteer_activism'
+                icon={HandHeart}
                 title='Donate'
                 description='Support temple activities and community services.'
+                href='/donations'
               />
               <ActionCard
                 key='events'
-                icon='event'
+                icon={CalendarDays}
                 title='Upcoming Events'
                 description='View festivals, celebrations, and special occasions.'
+                href='/events'
               />
             </div>
           </div>

@@ -1,11 +1,12 @@
 {
-  "temple": "Ganesha Temple",
-  "welcome": "Welcome to Ganesha Temple",
+  "temple": "Shri Vighneshwara Swamy Temple",
+  "welcome": "Welcome to Shri Vighneshwara Swamy Temple",
   "description": "A sacred Hindu temple dedicated to Lord Ganesha. Join us for daily pujas, festivals, and spiritual events.",
   "nav": {
     "home": "Home",
     "about": "About",
     "events": "Events",
+    "sevas": "Sevas",
     "gallery": "Gallery",
     "donations": "Donations",
     "contact": "Contact",

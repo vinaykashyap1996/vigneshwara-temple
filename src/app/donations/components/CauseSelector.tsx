@@ -102,12 +102,12 @@ export default function CauseSelector({
           <label
             htmlFor='custom-cause-text'
             className='text-muted text-xs font-bold uppercase tracking-wider mb-2 block'>
-            {t('causes.customLabel')}
+            {t('donations.causes.customLabel')}
           </label>
           <input
             id='custom-cause-text'
             className='w-full bg-white border border-border rounded-lg p-3 text-fg focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-all placeholder-muted/50'
-            placeholder={t('causes.customPlaceholder')}
+            placeholder={t('donations.causes.customPlaceholder')}
             type='text'
             value={customCauseText}
             onChange={(e) => onCustomCauseTextChange(e.target.value)}
@@ -115,7 +115,7 @@ export default function CauseSelector({
             aria-required='true'
             aria-label='Enter your custom donation purpose'
           />
-          <p className='text-xs text-muted/70 mt-2'>{t('causes.customNote')}</p>
+          <p className='text-xs text-muted/70 mt-2'>{t('donations.causes.customNote')}</p>
         </div>
       )}
     </section>
