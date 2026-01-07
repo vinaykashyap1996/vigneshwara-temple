@@ -17,7 +17,7 @@ export default function DonationSummaryCard({
   amount,
   showTaxBenefit,
 }: DonationSummaryCardProps) {
-  const { t } = useTranslation();
+  const { t } = useTranslation('donations');
   const formatAmount = (amt: number) => {
     return amt.toLocaleString('en-IN');
   };
@@ -26,7 +26,7 @@ export default function DonationSummaryCard({
     if (cause === 'custom' && customCauseText) {
       return customCauseText;
     }
-    return t(`donations.causes.${cause}`);
+    return t(`causes.${cause}`);
   };
 
   return (
@@ -36,7 +36,9 @@ export default function DonationSummaryCard({
         <span className='material-symbols-outlined text-orange-600'>
           receipt_long
         </span>
-        <h3 className='text-fg font-bold text-lg'>{t('donations.summary.title')}</h3>
+        <h3 className='text-fg font-bold text-lg'>
+          {t('donations.summary.title')}
+        </h3>
       </div>
 
       {/* Body */}
@@ -44,7 +46,9 @@ export default function DonationSummaryCard({
         {/* Cause */}
         <div className='flex justify-between items-start border-b border-border pb-4'>
           <div className='flex flex-col'>
-            <span className='text-muted text-sm'>{t('donations.summary.cause')}</span>
+            <span className='text-muted text-sm'>
+              {t('donations.summary.cause')}
+            </span>
             <span className='text-fg font-medium'>{getCauseDisplay()}</span>
           </div>
           {showTaxBenefit && (
@@ -58,19 +62,27 @@ export default function DonationSummaryCard({
 
         {/* Subtotal */}
         <div className='flex justify-between items-center'>
-          <span className='text-muted text-sm'>{t('donations.summary.subtotal')}</span>
+          <span className='text-muted text-sm'>
+            {t('donations.summary.subtotal')}
+          </span>
           <span className='text-fg font-medium'>₹ {formatAmount(amount)}</span>
         </div>
 
         {/* Processing Fee */}
         <div className='flex justify-between items-center'>
-          <span className='text-muted text-sm'>{t('donations.summary.processingFee')}</span>
-          <span className='text-green-600 font-medium text-sm'>{t('donations.summary.free')}</span>
+          <span className='text-muted text-sm'>
+            {t('donations.summary.processingFee')}
+          </span>
+          <span className='text-green-600 font-medium text-sm'>
+            {t('donations.summary.free')}
+          </span>
         </div>
 
         {/* Total */}
         <div className='pt-4 border-t border-border flex justify-between items-center mt-2'>
-          <span className='text-fg font-bold text-lg'>{t('donations.summary.total')}</span>
+          <span className='text-fg font-bold text-lg'>
+            {t('donations.summary.total')}
+          </span>
           <span className='text-orange-600 font-black text-2xl'>
             ₹ {formatAmount(amount)}
           </span>

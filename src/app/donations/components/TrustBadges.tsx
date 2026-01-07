@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import '../../../i18next';
 
 export default function TrustBadges() {
-  const { t } = useTranslation();
+  const { t } = useTranslation('donations');
 
   const badges = [
     {
@@ -34,8 +34,12 @@ export default function TrustBadges() {
                 {badge.icon}
               </span>
               <div className='flex flex-col'>
-                <span className='text-fg text-sm font-bold'>{t(badge.titleKey)}</span>
-                <span className='text-muted text-xs'>{t(badge.subtitleKey)}</span>
+                <span className='text-fg text-sm font-bold'>
+                  {t(badge.titleKey)}
+                </span>
+                <span className='text-muted text-xs'>
+                  {t(badge.subtitleKey)}
+                </span>
               </div>
             </div>
           ))}

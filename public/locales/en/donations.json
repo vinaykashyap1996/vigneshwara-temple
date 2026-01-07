@@ -1,0 +1,75 @@
+{
+  "donations": {
+    "hero": {
+      "badge": "Support Our Temple",
+      "title": "Your Generosity Makes a Difference",
+      "subtitle": "Help us maintain the temple, serve prasadam daily, and support community programs. Every donation brings blessings."
+    },
+    "causes": {
+      "title": "Choose Your Cause",
+      "maintenance": "Temple Maintenance",
+      "maintenanceDesc": "Support daily rituals, flowers, priests, and upkeep of the premises.",
+      "annadanam": "Anna Danam (Food Distribution)",
+      "annadanamDesc": "Help us feed hundreds of devotees daily with nutritious prasadam.",
+      "festivals": "Festival Celebrations",
+      "festivalsDesc": "Contribute to the ongoing expansion and structural repairs of the sanctum.",
+      "custom": "Custom Donation",
+      "customDesc": "Specify your own purpose for donation - educational programs, special events, or other temple activities.",
+      "customLabel": "Specify Your Donation Purpose *",
+      "customPlaceholder": "e.g., Educational programs, Special event, Scholarship fund...",
+      "customNote": "Please describe how you would like your donation to be used"
+    },
+    "amount": {
+      "title": "Select Donation Amount",
+      "custom": "Or Enter Custom Amount",
+      "placeholder": "Enter amount"
+    },
+    "donorInfo": {
+      "title": "Your Details",
+      "fullName": "Full Name *",
+      "fullNamePlaceholder": "Enter your full name",
+      "phone": "Phone Number *",
+      "phonePlaceholder": "Enter your phone number",
+      "email": "Email Address (Optional)",
+      "emailPlaceholder": "Enter your email",
+      "message": "Message or Prayer Request (Optional)",
+      "messagePlaceholder": "Share your prayers or wishes...",
+      "taxReceipt": "I would like to receive a tax receipt (80G benefit available)",
+      "taxReceiptNote": "We'll send the receipt to your email or phone"
+    },
+    "summary": {
+      "title": "Donation Summary",
+      "cause": "Donation For",
+      "taxBenefits": "80G Benefits",
+      "subtotal": "Subtotal",
+      "processingFee": "Processing Fee",
+      "free": "Free",
+      "total": "Total Amount"
+    },
+    "payment": {
+      "title": "Payment Method",
+      "upiTab": "UPI",
+      "cardTab": "Card / Net Banking",
+      "scanUpi": "Scan QR code to pay via UPI",
+      "upiApps": "Google Pay • PhonePe • Paytm • Any UPI app",
+      "securePayment": "or",
+      "donateButton": "Donate ₹ {{amount}} Now",
+      "secureTransaction": "Secure SSL encrypted transaction",
+      "cardComingSoon": "Card and Net Banking options coming soon. Please use UPI for now."
+    },
+    "trust": {
+      "secure": {
+        "title": "100% Secure",
+        "subtitle": "SSL encrypted payments"
+      },
+      "official": {
+        "title": "Government Registered",
+        "subtitle": "80G tax exemption available"
+      },
+      "tax": {
+        "title": "Instant Receipt",
+        "subtitle": "Email & SMS confirmation"
+      }
+    }
+  }
+}

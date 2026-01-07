@@ -1,12 +1,10 @@
 import { Suspense } from 'react';
 import CalendarMonthView from './components/CalendarMonthView';
-import UpcomingEventsList from './components/UpcomingEventsList';
 import FeaturedEventCard from './components/FeaturedEventCard';
 import NewsletterSection from './components/NewsletterSection';
 import MonthNavigator from './components/MonthNavigator';
 import TodayPanchangCard from '@/components/TodayPanchangCard';
 import EventsPageHeader from './components/EventsPageHeader';
-import EventsSidebar from './components/EventsSidebar';
 import UpcomingEventsCard from './components/UpcomingEventsCard';
 import { getMonthPanchang, getDayPanchang } from '@/lib/panchang/client';
 import { generateGoogleCalendarLink } from '@/lib/panchang/client';
@@ -51,7 +49,12 @@ export default async function EventsPage({ searchParams }: EventsPageProps) {
   try {
     // Fetch today's data first for immediate display
     const today = new Date();
-    const todayISO = today.toISOString().split('T')[0];
+    // Use local date for Bengaluru timezone (IST)
+    const todayISO = new Date(
+      today.getTime() - today.getTimezoneOffset() * 60000
+    )
+      .toISOString()
+      .split('T')[0];
     todayData = await getDayPanchang(todayISO);
 
     // Then fetch month data

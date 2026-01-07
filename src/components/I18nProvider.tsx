@@ -12,9 +12,11 @@ export default function I18nProvider({
   const { i18n } = useTranslation();
 
   useEffect(() => {
-    // Initialize i18n on mount
+    // Initialize i18n once at app startup
     if (typeof window !== 'undefined') {
-      require('../i18next');
+      import('../i18next').catch((error) => {
+        console.error('Failed to initialize i18n:', error);
+      });
     }
   }, []);
 

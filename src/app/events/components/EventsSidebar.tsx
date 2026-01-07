@@ -1,7 +1,6 @@
 'use client';
 
 import { useTranslation } from 'react-i18next';
-import { useEffect } from 'react';
 import UpcomingEventsList from './UpcomingEventsList';
 import TodayPanchangCard from '@/components/TodayPanchangCard';
 import FeaturedEventCard from './FeaturedEventCard';
@@ -20,11 +19,6 @@ export default function EventsSidebar({
 }: EventsSidebarProps) {
   const { t } = useTranslation('events');
 
-  useEffect(() => {
-    // Initialize i18n on client
-    import('@/i18next');
-  }, []);
-
   return (
     <div className='space-y-6'>
       {/* Upcoming Events Card */}
@@ -39,7 +33,9 @@ export default function EventsSidebar({
       </div>
 
       {/* Today's Panchang Card */}
-      {todayData && <TodayPanchangCard data={todayData} showShareButton={true} />}
+      {todayData && (
+        <TodayPanchangCard data={todayData} showShareButton={true} />
+      )}
 
       {/* Featured Festival Card */}
       {featuredDay && featuredDay.festivals.length > 0 && (

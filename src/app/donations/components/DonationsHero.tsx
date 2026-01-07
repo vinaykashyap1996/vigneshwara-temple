@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import '../../../i18next';
 
 export default function DonationsHero() {
-  const { t } = useTranslation();
+  const { t } = useTranslation('donations');
 
   return (
     <div className='w-full bg-orange-900 border-b border-orange-800'>

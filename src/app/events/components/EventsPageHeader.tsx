@@ -1,7 +1,6 @@
 'use client';
 
 import { useTranslation } from 'react-i18next';
-import { useEffect } from 'react';
 
 interface EventsPageHeaderProps {
   calendarLink: string;
@@ -11,11 +10,6 @@ export default function EventsPageHeader({
   calendarLink,
 }: EventsPageHeaderProps) {
   const { t } = useTranslation('events');
-
-  useEffect(() => {
-    // Initialize i18n on client
-    import('@/i18next');
-  }, []);
 
   return (
     <div className='mb-8 flex flex-col justify-between gap-6 md:flex-row md:items-end'>

@@ -13,11 +13,8 @@ export default function DonorInfoForm({
   donorInfo,
   onInfoChange,
 }: DonorInfoFormProps) {
-  const { t } = useTranslation();
-  const handleChange = (
-    field: keyof DonorInfo,
-    value: string | boolean
-  ) => {
+  const { t } = useTranslation('donations');
+  const handleChange = (field: keyof DonorInfo, value: string | boolean) => {
     onInfoChange({ ...donorInfo, [field]: value });
   };
 
@@ -27,7 +24,9 @@ export default function DonorInfoForm({
         <span className='flex items-center justify-center w-8 h-8 rounded-full bg-orange-500 text-white font-bold text-sm'>
           3
         </span>
-        <h2 className='text-fg text-xl font-bold'>{t('donations.donorInfo.title')}</h2>
+        <h2 className='text-fg text-xl font-bold'>
+          {t('donations.donorInfo.title')}
+        </h2>
       </div>
 
       <div className='bg-orange-50 rounded-xl p-6 border border-border grid grid-cols-1 md:grid-cols-2 gap-4'>

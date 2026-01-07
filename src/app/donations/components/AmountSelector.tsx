@@ -15,7 +15,7 @@ export default function AmountSelector({
   selectedAmount,
   onAmountChange,
 }: AmountSelectorProps) {
-  const { t } = useTranslation();
+  const { t } = useTranslation('donations');
   const [customAmount, setCustomAmount] = useState('');
 
   const handlePresetClick = (amount: number) => {
@@ -41,15 +41,16 @@ export default function AmountSelector({
         <span className='flex items-center justify-center w-8 h-8 rounded-full bg-orange-500 text-white font-bold text-sm'>
           2
         </span>
-        <h2 className='text-fg text-xl font-bold'>{t('donations.amount.title')}</h2>
+        <h2 className='text-fg text-xl font-bold'>
+          {t('donations.amount.title')}
+        </h2>
       </div>
 
       <div className='bg-orange-50 rounded-xl p-6 border border-border'>
         {/* Preset Amount Buttons */}
         <div className='grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6'>
           {presetAmounts.map((amount) => {
-            const isSelected =
-              selectedAmount === amount && customAmount === '';
+            const isSelected = selectedAmount === amount && customAmount === '';
             return (
               <button
                 key={amount}

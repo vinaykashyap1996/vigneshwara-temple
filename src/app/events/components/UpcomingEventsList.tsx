@@ -14,11 +14,6 @@ export default function UpcomingEventsList({
 }: UpcomingEventsListProps) {
   const { t, i18n } = useTranslation('events');
 
-  useEffect(() => {
-    // Initialize i18n on client
-    import('@/i18next');
-  }, []);
-
   // Get upcoming festivals - use useMemo to avoid SSR/client hydration mismatches
   const today = useMemo(() => {
     const d = new Date();

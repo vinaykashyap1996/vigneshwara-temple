@@ -14,7 +14,7 @@ export default function PaymentMethodSection({
   amount,
   onDonate,
 }: PaymentMethodSectionProps) {
-  const { t } = useTranslation();
+  const { t } = useTranslation('donations');
   const [activeTab, setActiveTab] = useState<'upi' | 'card'>('upi');
 
   const formatAmount = (amt: number) => {
@@ -23,7 +23,9 @@ export default function PaymentMethodSection({
 
   return (
     <div className='bg-orange-50 rounded-xl border border-orange-200 overflow-hidden p-6'>
-      <h3 className='text-fg font-bold text-lg mb-4'>{t('donations.payment.title')}</h3>
+      <h3 className='text-fg font-bold text-lg mb-4'>
+        {t('donations.payment.title')}
+      </h3>
 
       {/* Tabs */}
       <div className='flex p-1 bg-white rounded-lg mb-6 border border-border'>
@@ -83,7 +85,11 @@ export default function PaymentMethodSection({
             onClick={onDonate}
             className='w-full py-4 rounded-lg bg-orange-500 hover:bg-orange-600 text-white font-bold text-lg shadow-lg shadow-orange-500/20 transition-all flex items-center justify-center gap-2 group'
             aria-label={`Donate ${formatAmount(amount)} rupees now`}>
-            <span>{t('donations.payment.donateButton', { amount: formatAmount(amount) })}</span>
+            <span>
+              {t('donations.payment.donateButton', {
+                amount: formatAmount(amount),
+              })}
+            </span>
             <span className='material-symbols-outlined group-hover:translate-x-1 transition-transform'>
               arrow_forward
             </span>

@@ -3,7 +3,6 @@
 import { DayPanchangResponse } from '@/lib/panchang/types';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
-import { useEffect } from 'react';
 
 interface TodayPanchangCardProps {
   data: DayPanchangResponse;
@@ -14,13 +13,7 @@ export default function TodayPanchangCard({
   data,
   showShareButton = false,
 }: TodayPanchangCardProps) {
-  console.log('🚀 ~ TodayPanchangCard ~ data:', data);
   const { t, i18n } = useTranslation('events');
-
-  useEffect(() => {
-    // Initialize i18n on client
-    import('@/i18next');
-  }, []);
 
   const formatDate = (dateISO: string) => {
     const dateObj = new Date(dateISO);
@@ -49,7 +42,6 @@ export default function TodayPanchangCard({
   };
 
   const dateInfo = formatDate(data.dateISO);
-  const mainFestival = data.festivals?.find((f) => f.importance === 'major');
 
   return (
     <div className='rounded-xl border border-border bg-white p-6 shadow-sm'>
