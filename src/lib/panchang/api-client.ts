@@ -92,11 +92,6 @@ export async function fetchDayPanchang(
   const isSandbox = process.env.PANCHANG_SANDBOX === 'true';
   const [year, month, day] = date.split("-").map(Number);
 
-  console.log("🔑 Environment variables check:");
-  console.log("  - PANCHANG_CLIENT_ID:", clientId ? `${clientId.substring(0, 10)}...` : "NOT SET");
-  console.log("  - PANCHANG_CLIENT_SECRET:", clientSecret ? "SET (hidden)" : "NOT SET");
-  console.log("  - PANCHANG_SANDBOX:", isSandbox);
-
   // Check if we have OAuth credentials
   if (!clientId || !clientSecret) {
     console.warn(
@@ -112,13 +107,10 @@ export async function fetchDayPanchang(
   // In sandbox mode, Prokerala only allows January 1st (any year, any time)
   // In production, use the actual date
   const apiDate = isSandbox ? `${year}-01-01` : date;
-  console.log("🚀 ~ fetchDayPanchang ~ apiDate:", apiDate)
 
   if (isSandbox) {
     console.log(`Sandbox mode: Using ${apiDate} instead of ${date} for API call`);
   }
-
-  console.log("🚀 ~ fetchDayPanchang ~ Fetching panchang for date:", apiDate);
   url.searchParams.append("ayanamsa", "1"); // Lahiri ayanamsa
   url.searchParams.append("datetime", `${apiDate}T06:00:00+05:30`); // ISO 8601 with timezone
   url.searchParams.append("coordinates", `${TEMPLE_CONFIG.LAT},${TEMPLE_CONFIG.LNG}`);
@@ -152,6 +144,7 @@ export async function fetchDayPanchang(
       throw new Error(`API error: ${data.errors?.[0]?.detail || 'Unknown error'}`);
     }
 
+    // Normalize the API response to our DayPanchangResponse format
     return normalizeDayResponse(data, date, year, month, day);
   } catch (error) {
     console.error("Error fetching day panchang:", error);
@@ -240,13 +233,16 @@ function normalizeDayResponse(
   const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const weekday = weekdays[date.getDay()];
 
-  // Normalize sunrise/sunset - Prokerala returns time objects
+  // Helper: Extract time from ISO 8601 string or time object
   const extractTime = (timeObj: unknown, defaultValue?: string): string | undefined => {
     if (!timeObj) return defaultValue;
-    if (typeof timeObj === 'string') return timeObj;
+    if (typeof timeObj === 'string') {
+      // Extract time from ISO 8601: "2026-01-09T06:47:53+05:30" -> "06:47"
+      const match = timeObj.match(/T(\d{2}):(\d{2})/);
+      return match ? `${match[1]}:${match[2]}` : timeObj;
+    }
     if (typeof timeObj === 'object' && timeObj !== null) {
       const obj = timeObj as Record<string, unknown>;
-      if (obj.time && typeof obj.time === 'string') return obj.time;
       if (typeof obj.hour === 'number' && typeof obj.minute === 'number') {
         return `${String(obj.hour).padStart(2, '0')}:${String(obj.minute).padStart(2, '0')}`;
       }
@@ -254,46 +250,46 @@ function normalizeDayResponse(
     return defaultValue;
   };
 
-  const sunrise = extractTime(data.sunrise || data.sun_rise, "06:00") || "06:00";
-  const sunset = extractTime(data.sunset || data.sun_set, "18:00") || "18:00";
+  // Sunrise/Sunset - extract from ISO 8601 strings
+  const sunrise = extractTime(data.sunrise, "06:00") || "06:00";
+  const sunset = extractTime(data.sunset, "18:00") || "18:00";
 
-  // Normalize tithi - Prokerala structure
-  const nakshatraDetailsObj = data.nakshatra_details as Record<string, unknown> | undefined;
-  const tithiData = data.tithi || nakshatraDetailsObj?.tithi;
-  const tithiObj = tithiData as Record<string, unknown> | undefined;
+  // Tithi - Prokerala returns array, use first item
+  const tithiArray = data.tithi as Array<Record<string, unknown>> | undefined;
+  const tithiObj = Array.isArray(tithiArray) && tithiArray.length > 0 ? tithiArray[0] : undefined;
   const pakshaValue = tithiObj?.paksha as string | undefined;
   const tithi: Tithi = {
-    name: tithiObj?.name as string || tithiObj?.tithi_name as string || "Unknown",
-    paksha: (pakshaValue === "Shukla" || pakshaValue === "Krishna") ? pakshaValue as "Shukla" | "Krishna" : undefined,
-    start: extractTime(tithiObj?.start || tithiObj?.start_time),
-    end: extractTime(tithiObj?.end || tithiObj?.end_time),
+    name: tithiObj?.name as string || "Unknown",
+    paksha: pakshaValue?.includes("Krishna") ? "Krishna" : pakshaValue?.includes("Shukla") ? "Shukla" : undefined,
+    start: extractTime(tithiObj?.start),
+    end: extractTime(tithiObj?.end),
   };
 
-  // Normalize nakshatra
-  const nakshatraData = data.nakshatra || data.nakshatra_details;
-  const nakshatraObj = nakshatraData as Record<string, unknown> | undefined;
+  // Nakshatra - Prokerala returns array, use first item
+  const nakshatraArray = data.nakshatra as Array<Record<string, unknown>> | undefined;
+  const nakshatraObj = Array.isArray(nakshatraArray) && nakshatraArray.length > 0 ? nakshatraArray[0] : undefined;
   const nakshatra = {
-    name: nakshatraObj?.name as string || nakshatraObj?.nakshatra_name as string || "Unknown",
-    start: extractTime(nakshatraObj?.start || nakshatraObj?.start_time),
-    end: extractTime(nakshatraObj?.end || nakshatraObj?.end_time),
+    name: nakshatraObj?.name as string || "Unknown",
+    start: extractTime(nakshatraObj?.start),
+    end: extractTime(nakshatraObj?.end),
   };
 
-  // Normalize yoga
-  const yogaData = data.yoga;
-  const yogaObj = yogaData as Record<string, unknown> | undefined;
+  // Yoga - Prokerala returns array, use first item
+  const yogaArray = data.yoga as Array<Record<string, unknown>> | undefined;
+  const yogaObj = Array.isArray(yogaArray) && yogaArray.length > 0 ? yogaArray[0] : undefined;
   const yoga = {
-    name: yogaObj?.name as string || yogaObj?.yoga_name as string || "Unknown",
-    start: extractTime(yogaObj?.start || yogaObj?.start_time),
-    end: extractTime(yogaObj?.end || yogaObj?.end_time),
+    name: yogaObj?.name as string || "Unknown",
+    start: extractTime(yogaObj?.start),
+    end: extractTime(yogaObj?.end),
   };
 
-  // Normalize karana
-  const karanaData = data.karana;
-  const karanaObj = karanaData as Record<string, unknown> | undefined;
+  // Karana - Prokerala returns array, use first item
+  const karanaArray = data.karana as Array<Record<string, unknown>> | undefined;
+  const karanaObj = Array.isArray(karanaArray) && karanaArray.length > 0 ? karanaArray[0] : undefined;
   const karana = {
-    name: karanaObj?.name as string || karanaObj?.karana_name as string || "Unknown",
-    start: extractTime(karanaObj?.start || karanaObj?.start_time),
-    end: extractTime(karanaObj?.end || karanaObj?.end_time),
+    name: karanaObj?.name as string || "Unknown",
+    start: extractTime(karanaObj?.start),
+    end: extractTime(karanaObj?.end),
   };
 
   // Normalize festivals

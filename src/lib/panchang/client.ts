@@ -58,7 +58,6 @@ export async function getDayPanchang(
       throw new Error(`Failed to fetch day data: ${response.statusText}`);
     }
     const responseData = await response.json();
-    console.log("🚀 ~ getDayPanchang ~ response:", responseData)
 
     return responseData;
   } catch (error) {

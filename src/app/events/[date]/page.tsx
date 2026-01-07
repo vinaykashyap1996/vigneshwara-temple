@@ -69,7 +69,7 @@ export default async function EventDetailPage({
     } ${day}${suffix}, ${dateObj.getFullYear()}`;
   };
 
-  const mainFestival = dayData.festivals.find((f) => f.importance === 'major');
+  const mainFestival = dayData.festivals?.find((f) => f.importance === 'major');
   const title = mainFestival
     ? `${mainFestival.name}`
     : `Daily Panchang - ${dayData.tithi.name}`;
