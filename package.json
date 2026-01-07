@@ -15,7 +15,7 @@
     "i18next-locize-backend": "^8.1.2",
     "locize": "^4.0.14",
     "locize-lastused": "^4.0.2",
-    "next": "16.0.3",
+    "next": "16.0.10",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "react-i18next": "^16.5.0"
