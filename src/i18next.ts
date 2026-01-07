@@ -29,7 +29,7 @@ i18n
             crossDomain: false,
         },
 
-        ns: ['common'],
+        ns: ['common', 'events'],
         defaultNS: 'common',
 
         detection: {

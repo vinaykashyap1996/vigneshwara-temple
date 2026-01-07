@@ -12,6 +12,7 @@
  * 3. Add PANCHANG_CLIENT_ID and PANCHANG_CLIENT_SECRET to .env.local
  */
 
+import { cache } from 'react';
 import {
   DayPanchang,
   DayPanchangResponse,
@@ -83,14 +84,22 @@ async function getAccessToken(): Promise<string> {
 
 /**
  * Fetch Panchang data for a single day
+ * Cached per request to avoid duplicate API calls
  */
-export async function fetchDayPanchang(
+export const fetchDayPanchang = cache(async (
   date: string // YYYY-MM-DD
-): Promise<DayPanchangResponse> {
+): Promise<DayPanchangResponse> => {
   const clientId = process.env.PANCHANG_CLIENT_ID;
   const clientSecret = process.env.PANCHANG_CLIENT_SECRET;
   const isSandbox = process.env.PANCHANG_SANDBOX === 'true';
   const [year, month, day] = date.split("-").map(Number);
+
+  console.log('🔍 Environment check:', {
+    hasClientId: !!clientId,
+    hasClientSecret: !!clientSecret,
+    isSandbox,
+    date,
+  });
 
   // Check if we have OAuth credentials
   if (!clientId || !clientSecret) {
@@ -101,7 +110,7 @@ export async function fetchDayPanchang(
   }
 
   // Prokerala API endpoint
-  const baseUrl = "https://api.prokerala.com/v2/astrology/panchang";
+  const baseUrl = "https://api.prokerala.com/v2/astrology/panchang/advanced";
   const url = new URL(baseUrl);
 
   // In sandbox mode, Prokerala only allows January 1st (any year, any time)
@@ -130,6 +139,12 @@ export async function fetchDayPanchang(
       },
     });
 
+    console.log('📡 API Response:', {
+      status: response.status,
+      statusText: response.statusText,
+      ok: response.ok,
+    });
+
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
       console.error(`API request failed: ${response.status} ${response.statusText}`, errorData);
@@ -137,6 +152,11 @@ export async function fetchDayPanchang(
     }
 
     const data = await response.json();
+    console.log('✅ API Data received:', {
+      hasData: !!data,
+      status: data.status,
+      hasPanchang: !!data.data,
+    });
 
     // Check for API error response
     if (data.status === 'error') {
@@ -147,12 +167,13 @@ export async function fetchDayPanchang(
     // Normalize the API response to our DayPanchangResponse format
     return normalizeDayResponse(data, date, year, month, day);
   } catch (error) {
-    console.error("Error fetching day panchang:", error);
+    console.error("❌ Error fetching day panchang:", error);
+    console.error("Error details:", error instanceof Error ? error.message : error);
 
     // Fallback to basic data if API fails
     return getFallbackDayData(date, year, month, day);
   }
-}
+});
 
 /**
  * Fetch Panchang data for an entire month
@@ -325,6 +346,29 @@ function normalizeDayResponse(
   const now = new Date();
   const isCurrentMonth = dateObj.getMonth() === now.getMonth() && dateObj.getFullYear() === now.getFullYear();
 
+  // Helper to extract period times from arrays
+  const extractPeriodTime = (periods: unknown): string | undefined => {
+    if (!Array.isArray(periods) || periods.length === 0) return undefined;
+    const period = periods[0] as Record<string, unknown>;
+    const start = extractTime(period.start);
+    const end = extractTime(period.end);
+    if (start && end) return `${start} - ${end}`;
+    return undefined;
+  };
+
+  // Extract auspicious periods
+  const auspiciousPeriodArray = data.auspicious_period as Array<Record<string, unknown>> | undefined;
+  const abhijitPeriod = auspiciousPeriodArray?.find(p => (p.name as string)?.includes('Abhijit'));
+  const amritPeriod = auspiciousPeriodArray?.find(p => (p.name as string)?.includes('Amrit'));
+
+  // Extract inauspicious periods
+  const inauspiciousPeriodArray = data.inauspicious_period as Array<Record<string, unknown>> | undefined;
+  const rahuPeriod = inauspiciousPeriodArray?.find(p => (p.name as string)?.toLowerCase().includes('rahu'));
+  const yamagandaPeriod = inauspiciousPeriodArray?.find(p => (p.name as string)?.toLowerCase().includes('yamaganda'));
+  const gulikaPeriod = inauspiciousPeriodArray?.find(p => (p.name as string)?.toLowerCase().includes('gulika'));
+  const durmuhurtaPeriod = inauspiciousPeriodArray?.find(p => (p.name as string)?.toLowerCase().includes('dur'));
+  const varjyamPeriod = inauspiciousPeriodArray?.find(p => (p.name as string)?.toLowerCase().includes('varjyam'));
+
   return {
     dateISO,
     weekday,
@@ -343,13 +387,13 @@ function normalizeDayResponse(
     moonPhase: typeof data.moon_phase === 'object' && data.moon_phase !== null
       ? (data.moon_phase as Record<string, unknown>).phase_name as string | undefined
       : data.moon_phase as string | undefined,
-    rahu: extractTime((data as Record<string, unknown>).rahu_kala || (data as Record<string, unknown>).rahu),
-    gulika: extractTime((data as Record<string, unknown>).gulika),
-    yamaghanda: extractTime((data as Record<string, unknown>).yamaghanda || (data as Record<string, unknown>).yamakanda),
-    abhijit: extractTime((data as Record<string, unknown>).abhijit_muhurta || (data as Record<string, unknown>).abhijit),
-    amritakala: extractTime((data as Record<string, unknown>).amrita_kala || (data as Record<string, unknown>).amritakala),
-    durmuhurta: extractTime((data as Record<string, unknown>).durmuhurta),
-    varjyam: extractTime((data as Record<string, unknown>).varjyam),
+    rahu: extractPeriodTime(rahuPeriod?.period),
+    gulika: extractPeriodTime(gulikaPeriod?.period),
+    yamaghanda: extractPeriodTime(yamagandaPeriod?.period),
+    abhijit: extractPeriodTime(abhijitPeriod?.period),
+    amritakala: extractPeriodTime(amritPeriod?.period),
+    durmuhurta: extractPeriodTime(durmuhurtaPeriod?.period),
+    varjyam: extractPeriodTime(varjyamPeriod?.period),
   };
 }
 

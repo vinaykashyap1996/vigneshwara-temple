@@ -4,7 +4,11 @@ import UpcomingEventsList from './components/UpcomingEventsList';
 import FeaturedEventCard from './components/FeaturedEventCard';
 import NewsletterSection from './components/NewsletterSection';
 import MonthNavigator from './components/MonthNavigator';
-import { getMonthPanchang } from '@/lib/panchang/client';
+import TodayPanchangCard from '@/components/TodayPanchangCard';
+import EventsPageHeader from './components/EventsPageHeader';
+import EventsSidebar from './components/EventsSidebar';
+import UpcomingEventsCard from './components/UpcomingEventsCard';
+import { getMonthPanchang, getDayPanchang } from '@/lib/panchang/client';
 import { generateGoogleCalendarLink } from '@/lib/panchang/client';
 
 interface EventsPageProps {
@@ -43,7 +47,14 @@ export default async function EventsPage({ searchParams }: EventsPageProps) {
 
   // Fetch month data from API
   let monthData;
+  let todayData;
   try {
+    // Fetch today's data first for immediate display
+    const today = new Date();
+    const todayISO = today.toISOString().split('T')[0];
+    todayData = await getDayPanchang(todayISO);
+
+    // Then fetch month data
     monthData = await getMonthPanchang(year, month);
   } catch (error) {
     console.error('Failed to load month data:', error);
@@ -104,39 +115,13 @@ export default async function EventsPage({ searchParams }: EventsPageProps) {
       <main className='flex-grow'>
         <div className='mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8'>
           {/* Page Header */}
-          <div className='mb-8 flex flex-col justify-between gap-6 md:flex-row md:items-end'>
-            <div className='max-w-2xl'>
-              <h2 className='text-4xl font-black leading-tight tracking-tight text-fg sm:text-5xl'>
-                Events &amp; Festivals
-              </h2>
-              <p className='mt-3 text-lg text-muted'>
-                Complete Hindu Panchang with festivals, tithis, and auspicious
-                timings for Bengaluru
-              </p>
-            </div>
-            <div className='flex flex-wrap gap-3'>
-              <a
-                href={generateGoogleCalendarLink({
-                  title: 'Temple Events',
-                  date: `${year}-${String(month).padStart(2, '0')}-01`,
-                  description: 'Monthly temple events and festivals',
-                })}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='flex items-center gap-2 rounded-lg bg-white border border-border px-4 py-2.5 text-sm font-medium text-fg hover:bg-orange-50 transition-colors shadow-sm'>
-                <span className='material-symbols-outlined text-lg'>
-                  calendar_add_on
-                </span>
-                Add to Calendar
-              </a>
-              <a
-                href='#newsletter'
-                className='flex items-center gap-2 rounded-lg bg-white border border-border px-4 py-2.5 text-sm font-medium text-fg hover:bg-orange-50 transition-colors shadow-sm'>
-                <span className='material-symbols-outlined text-lg'>mail</span>
-                Subscribe to Updates
-              </a>
-            </div>
-          </div>
+          <EventsPageHeader
+            calendarLink={generateGoogleCalendarLink({
+              title: 'Temple Events',
+              date: `${year}-${String(month).padStart(2, '0')}-01`,
+              description: 'Monthly temple events and festivals',
+            })}
+          />
 
           <div className='grid grid-cols-1 gap-8 lg:grid-cols-12'>
             {/* Main Calendar Section (Left/Top) */}
@@ -165,15 +150,12 @@ export default async function EventsPage({ searchParams }: EventsPageProps) {
 
             {/* Upcoming List Section (Right Sidebar) */}
             <div className='lg:col-span-4 space-y-6'>
-              <div className='rounded-xl border border-border bg-white p-6 shadow-sm'>
-                <h3 className='mb-5 flex items-center gap-2 text-xl font-bold text-fg'>
-                  <span className='material-symbols-outlined text-orange-600'>
-                    event_upcoming
-                  </span>
-                  Upcoming Events
-                </h3>
-                <UpcomingEventsList monthData={monthData.days} />
-              </div>
+              <UpcomingEventsCard monthData={monthData.days} />
+
+              {/* Today's Panchang Card */}
+              {todayData && (
+                <TodayPanchangCard data={todayData} showShareButton={false} />
+              )}
 
               {/* Featured Festival Card */}
               {featuredDay && featuredDay.festivals.length > 0 && (
